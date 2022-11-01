@@ -10,10 +10,10 @@
         <div>
             <ul class="navbar__links">
                 <li class="navbar__link">
-                    <a href="#">Home</a>
+                    <NuxtLink to="/" >Home</NuxtLink>
                 </li>
                 <li class="navbar__link">
-                    <a href="#">About</a>
+                    <NuxtLink to="/about" >About</NuxtLink>
                 </li>
                 <li class="navbar__link">
                     <a href="#">Contact</a>

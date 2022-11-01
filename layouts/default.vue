@@ -3,9 +3,11 @@
 </script>
 
 <template>
-    <div class="w-100 h-screen flex justify-center bg-slate-900">
+    <div class="w-100 h-screen flex flex-col items-center bg-slate-900 ">
         <Navbar/>
-        <slot></slot>  
+        <div class="text-white" >
+            <slot></slot>  
+        </div>
     </div>
 </template>
 
