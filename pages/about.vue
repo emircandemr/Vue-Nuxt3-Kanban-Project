@@ -2,8 +2,8 @@
 
 </script>
 <template>
-    <div>   
-        <h1>About</h1>
+    <div class="w-full flex flex-wrap items-center justify-center ">
+        <Card v-for="i in 8"/>   
     </div>
 </template>
 
