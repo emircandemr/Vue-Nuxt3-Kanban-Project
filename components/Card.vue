@@ -7,8 +7,11 @@
         <div class="text-gray mb-2 text-sm">
             <h1>Lorem Ipsum Dolar</h1>
         </div>
-        <div class="">
+        <div class="text-sm">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
+        </div>
+        <div class="w-full flex justify-center items-center mt-5">
+            <button class="w-1/2 py-1 px-1 rounded-lg bg-[#ff9900]">Add</button>
         </div>
     </div>
 </template>
