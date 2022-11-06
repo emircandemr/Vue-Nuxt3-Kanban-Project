@@ -4,21 +4,13 @@
 
 <template>
     <div class="navbar">
-        <div class="navbar__logo">
-            APP
-        </div>
-        <div>
-            <ul class="navbar__links">
-                <li class="navbar__link">
-                    <NuxtLink to="/" >Home</NuxtLink>
-                </li>
-                <li class="navbar__link">
-                    <NuxtLink to="/about" >About</NuxtLink>
-                </li>
-                <li class="navbar__link">
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
+        <div class="navbar__input">
+            <div class="w-10 flex items-center justify-center ml-2">
+                <span class="material-symbols-outlined">
+                    search
+                </span>
+            </div>
+            <input type="text">
         </div>  
     </div>
 </template>
@@ -27,13 +19,15 @@
 <style scoped>
 
 .navbar{
-    @apply w-3/4 mt-5 h-12 bg-slate-100 rounded-2xl shadow-2xl flex items-center px-5
+    @apply w-full mt-5 h-12 flex items-center 
 }
-.navbar__logo {
-    @apply text-2xl font-bold text-slate-900 mr-5
+
+.navbar__input{
+    @apply w-1/3 h-10 bg-transparent border border-gray-400 rounded-xl flex items-center ml-7
 }
-.navbar__links {
-    @apply flex justify-end w-full 
+
+.navbar__input input {
+    @apply w-full h-full bg-transparent  outline-none text-white
 }
 
 </style>
