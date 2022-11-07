@@ -23,7 +23,7 @@
 }
 
 .navbar__input{
-    @apply w-1/3 h-10 bg-transparent border border-gray-400 rounded-xl flex items-center ml-7
+    @apply w-1/3 h-10 bg-transparent border border-gray-700 rounded-xl flex items-center ml-7
 }
 
 .navbar__input input {
