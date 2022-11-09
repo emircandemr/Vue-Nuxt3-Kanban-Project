@@ -3,8 +3,8 @@
 </script>
 
 <template>
-    <div>
-        <h1>Home</h1>
+    <div class="w-[90%] h-[85%] grid grid-cols-3 pt-5 ">
+        <Card v-for="i in 9"/>   
     </div>
 </template>
 
