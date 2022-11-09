@@ -3,8 +3,8 @@
 </script>
 
 <template>
-    <div class="w-40 h-screen flex items-center justify-center">
-        <div class="w-28 h-[90%] bg-[#0C0B0B] rounded-xl shadow-2xl ">
+    <div class="w-40 h-screen flex items-center justify-center ml-5">
+        <div class="w-28 h-[90%] bg-[#0C0B0B] rounded-xl  ">
             <div class="w-full h-20 text-2xl font-bold text-white mr-5 flex flex-col justify-center items-center mt-10 ">
                 <h1>P.</h1>
             </div>
