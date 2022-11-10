@@ -11,5 +11,10 @@
     "@nuxtjs/color-mode": "^3.1.8",
     "@nuxtjs/tailwindcss": "^6.1.2",
     "nuxt": "3.0.0-rc.12"
+  },
+  "dependencies": {
+    "@nuxtjs/composition-api": "^0.33.1",
+    "@pinia/nuxt": "^0.4.3",
+    "pinia": "^2.0.23"
   }
 }

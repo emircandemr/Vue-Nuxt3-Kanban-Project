@@ -9,9 +9,9 @@
                 <h1>P.</h1>
             </div>
             <div class="w-full h-3/4  flex flex-col items-center text-white">
-                <ul class="py-1 px-5 rounded-lg hover:bg-gray-900" v-for="i in 5">
-                    <li class="my-5">
-                        <NuxtLink  to="/" class="flex" >
+                <ul>
+                    <li class="my-5 py-3 px-5 rounded-lg hover:bg-gray-200 hover:text-black">
+                        <NuxtLink to="/" class="flex" >
                             <div class="flex justify-center items-center">
                                 <span class="material-symbols-rounded">
                                     home
@@ -19,15 +19,22 @@
                             </div>
                         </NuxtLink>
                     </li>
+                    <li class="my-5 py-3 px-5 rounded-lg hover:bg-gray-200 hover:text-black">
+                        <NuxtLink  to="/about" class="flex" >
+                            <div class="flex justify-center items-center">
+                                <span class="material-symbols-rounded">
+                                    about
+                                </span>
+                            </div>
+                        </NuxtLink>
+                    </li>
                 </ul>
             </div>
-            
-
         </div>
     </div>
 </template>
 
 
-<style lang="scss" scoped>
+<style  scoped>
 
 </style>
