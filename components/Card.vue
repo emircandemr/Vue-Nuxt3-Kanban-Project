@@ -12,41 +12,72 @@ const selectHandler = (data) => {
     isCompleted.value = true
 }
 
+const isDragActive = ref(false)
 
+const dragActiveHandler = () => {
+    isDragActive.value = true
+}
+
+const dragLeaveHandler = () => {
+    isDragActive.value = false
+}
 
 </script>
 
 <template>
-    <div class="w-full min-w-full h-44 bg-[#ffffff] py-3 text-center my-2 rounded-xl text-black drop-shadow-xl hover:border-[#0C0B0B] cursor-pointer relative"
+    <div class="w-full bg-[#ffffff] border border-stone-300 border-dashed pt-3 pb-1 my-2 rounded-xl text-black drop-shadow-xl hover:border-[#0C0B0B] cursor-pointer relative"
     draggable="true"
     @dragstart="dataStore.StartDragData($event,props.item)"
-    >
-        <div class="text-gray mb-2 text-md  font-extrabold ">
-            <h1>{{props.item.title}}</h1>
+    @dragenter.prevent = "dragActiveHandler"
+    @dragend.prevent = "dragLeaveHandler"
+    :class="{'active' : isDragActive}">
+
+    <div class="w-full flex justify-around items-center ">
+        <span class="w-12 ml-2 py-1 rounded-md bg-red-200 text-center text-xs text-red-800 ">
+            High
+        </span>
+        <span class="min-w-12 px-1 mr-2 py-1 rounded-md  bg-green-100 text-center text-xs text-green-900 ">
+            +{{props.item.point}}
+        </span>
+        <span class="w-28 px-1 mr-2 py-1 rounded-md  bg-[#edf0f7] text-center text-xs text-slate-800 ">
+           Start : Nov 11, 2022
+        </span>
+    </div>
+
+    <div class="w-full h-12 mt-2 px-3 py-1 ">
+        <h1 class="text-sm font-bold text-slate-600">
+            {{props.item.title}}
+        </h1>
+
+        <p class="text-xs truncate text-slate-900">
+            {{props.item.description}}
+        </p>
+    </div>
+    <div class="w-full h-10 flex justify-around items-center">
+        <button class="w-12 p-1 ml-2 rounded-md text-xs bg-[#edf0f7] text-center" >Inspect</button>
+        <span class="w-12 px-1 mr-2 py-1 rounded-md  bg-yellow-100 text-center text-xs text-yellow-900 ">
+           5 Days
+        </span>
+        <span class="w-28 px-1 mr-2 py-1 rounded-md  bg-[#edf0f7] text-center text-xs text-slate-800 ">
+           End : Nov 11, 2022
+        </span>
+    </div>
+
+    <div v-if="props.item.isStatu=== 'Done'" class="w-full h-full absolute top-0 bg-white rounded-xl">
+        <div class="w-full flex justify-center items-center">
+            <span class="material-symbols-outlined text-5xl font-extrabold text-slate-700">
+                done
+            </span>
         </div>
-        <div class="w-14 h-8 absolute top-1 right-5 flex justify-center items-center ">
-            <h1 class="text-green-500 text-sm font-bold text-center pt-1">+{{props.item.point}}</h1>
+        <div class="w-full px-3">
+            <h1 class="text-md text-slate-700 font-bold text-center">Congratulations !</h1>
+            <p class="text-xs text-slate-800 truncate mt-2 font-semibold text-center">You earned {{props.item.point}} points for completing the mission</p>
         </div>
-        <div class="text-sm px-5">
-            <p>{{props.item.description}}</p>
+        <div class="w-full h-10 flex justify-center items-center ">
+            <button class="w-12 py-1 rounded-md text-xs bg-[#edf0f7] text-center" >Review</button>
         </div>
-        <div class="w-full flex justify-center items-center mt-5 absolute bottom-5">
-            <button class="w-[30%] py-1 px-1 rounded-lg bg-[#edf0f7] text-sm text-black font-bold" @click="selectHandler(props.item)" >Completed</button>
-        </div>
-        <div v-if="isCompleted" class="w-full h-full absolute top-0 bg-white rounded-xl">
-            <div class="w-full h-16 flex justify-center items-center">
-                <span class="material-symbols-outlined text-6xl font-extrabold">
-                    done
-                </span>
-            </div>
-            <div class="w-full h-10 my-1 flex flex-col justify-center items-center">
-                <h1 class="text-xl font-bold">Congratulations !</h1>
-                <p class="text-sm mt-2 font-semibold">You earned {{props.item.point}} points for completing the mission</p>
-            </div>
-            <div class="w-full h-10 mt-5 flex justify-center items-center">
-                <button class="w-[30%] py-1 px-1 rounded-lg bg-[#000000] text-sm text-gray-100 font-bold">Close</button>
-            </div>
-        </div>
+
+    </div>
 
 
     </div>
@@ -54,5 +85,10 @@ const selectHandler = (data) => {
 
 
 <style scoped>
+
+.active{
+    border: 2px dashed #0C0B0B;
+    background-color: #edf0f7;
+}
 
 </style>

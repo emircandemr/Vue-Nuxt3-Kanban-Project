@@ -8,8 +8,8 @@ export const useDataStore = defineStore("data", {
                     id: 1, 
                     title: "Title 1", 
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
-                    point : 10000,
-                    isStatu : "Todo"
+                    point : 100000,
+                    isStatu : "Backlog"
                 },
                 {
                     id: 2, 
