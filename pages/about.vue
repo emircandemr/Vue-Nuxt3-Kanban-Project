@@ -3,11 +3,49 @@ import {useDataStore} from '../stores/use-Data'
 
 const dataStore = useDataStore()
 
+// dataStore.getStartDragData()
 
 </script>
 <template>
-    <div class="w-full h-full flex flex-wrap justify-center items-center gap-8 pt-5">
-        <Card v-for="data in dataStore.selected" :key="data.id" :item="data" />
+    <div class="w-full h-full flex flex-wrap justify-center items-center">
+        <div class="w-1/3 p-5 h-full flex flex-col items-center"
+        @drop="dataStore.DropData($event, 'Todo' )"
+        @dragenter.prevent
+        @dragover.prevent
+        >
+            <div class="bg-[#ffffff] rounded-xl w-[85%] py-3 mb-3 flex justify-center items-center">
+                <h1 class="text-xl font-bold">To Do</h1>
+            </div> 
+            <div class="w-[85%]  flex flex-col items-center">
+                <Card v-for="data in dataStore.getData('Todo')" :key="data.id" :item="data" />
+            </div>
+
+        </div>
+        <div class="w-1/3 p-5 h-full flex flex-col items-center"
+        @drop="dataStore.DropData($event, 'Inprogress' )"
+        @dragenter.prevent
+        @dragover.prevent>
+            <div class="bg-[#ffffff] rounded-xl w-[85%] py-3 mb-3 flex justify-center items-center">
+                <h1 class="text-xl font-bold">In Progress</h1>
+            </div> 
+            <div class="w-[85%]  flex flex-col items-center">
+                <Card v-for="data in dataStore.getData('Inprogress')" :key="data.id" :item="data" />
+            </div>
+
+        </div>
+        <div class="w-1/3 p-5 h-full flex flex-col items-center"
+        @drop="dataStore.DropData($event, 'Done' )"
+        @dragenter.prevent
+        @dragover.prevent
+        >
+            <div class="bg-[#ffffff] rounded-xl w-[85%] py-3 mb-3 flex justify-center items-center">
+                <h1 class="text-xl font-bold">Done</h1>
+            </div> 
+            <div class="w-[85%]  flex flex-col items-center">
+                <Card v-for="data in dataStore.getData('Done')" :key="data.id" :item="data" />
+            </div>
+
+        </div>
     </div>
 </template>
 

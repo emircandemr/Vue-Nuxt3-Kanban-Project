@@ -4,10 +4,10 @@
 <template>
     <div class="main">
         <Sidebar/>
-        <Recently></Recently>
         <div class="main__content" >
             <slot></slot>  
         </div>
+        <Recently></Recently>
     </div>
 </template>
 
@@ -15,11 +15,11 @@
 <style scoped>
 
 .main {
-    @apply w-full h-screen bg-gray-50 flex items-center relative
+    @apply w-full h-screen bg-[#edf0f7] flex items-center justify-center
 }
 
 .main__content{
-  @apply  bg-gray-50 w-[75%] h-[90%] flex flex-col items-center ;
+  @apply w-[75%] h-[90%] flex flex-col items-center;
 }
 
 </style>
