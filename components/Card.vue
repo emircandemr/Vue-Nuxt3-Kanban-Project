@@ -22,10 +22,10 @@ const dragLeaveHandler = () => {
     isDragActive.value = false
 }
 
-const isModalActive = ref(false)
 
-const modalActiveHandler = () => {
-    isModalActive.value = !isModalActive.value
+const modalHandler = () => {
+    dataStore.setModalChange()
+    dataStore.setSelectedData(props.item)
 }
 
 </script>
@@ -61,7 +61,7 @@ const modalActiveHandler = () => {
     </div>
     <div class="w-full h-10 flex justify-around items-center">
         <button class="w-12 p-1 ml-2 rounded-md text-xs bg-[#edf0f7] text-center hover:bg-slate-300 hover:border hover:border-dashed hover:border-black" 
-        @click="modalActiveHandler"
+        @click="modalHandler"
         >Inspect</button>
         <span class="w-12 px-1 mr-2 py-1 rounded-md  bg-yellow-100 text-center text-xs text-yellow-900 ">
            5 Days
@@ -92,7 +92,7 @@ const modalActiveHandler = () => {
 
     </div>
     </div>
-    <CardModal v-if="isModalActive" ></CardModal>
+    <CardModal v-if="dataStore.isModalActive" ></CardModal>
 </template>
 
 

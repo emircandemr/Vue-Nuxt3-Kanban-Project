@@ -42,13 +42,13 @@ export const useDataStore = defineStore("data", {
                 // {id: 12, title: "Title 12", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", point : 100},
 
             ],
-            selected: [],
-           
+            selected:"",
+            isModalActive : false,
         }
     },
     actions: {
         setSelectedData(data) {
-            this.selected.push(data)
+            this.selected = data
         },
         getData(statu){
             return this.data.filter(item => item.isStatu === statu)
@@ -66,11 +66,14 @@ export const useDataStore = defineStore("data", {
             const itemID = event.dataTransfer.getData("id");
             const index = this.data.findIndex(item => item.id === parseInt(itemID))
             this.data[index].isStatu = statu
+        },
+        setModalChange(){
+            this.isModalActive = !this.isModalActive
         }
     },
     getters: {
-        getTotalPoint() {
-            return this.selected.reduce((a, b) => a + b.point, 0)
-        },
+        // getTotalPoint() {
+        //     return this.selected.reduce((a, b) => a + b.point, 0)
+        // },
     }
 })
