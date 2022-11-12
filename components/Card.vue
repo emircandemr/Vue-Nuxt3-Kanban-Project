@@ -22,6 +22,12 @@ const dragLeaveHandler = () => {
     isDragActive.value = false
 }
 
+const isModalActive = ref(false)
+
+const modalActiveHandler = () => {
+    isModalActive.value = !isModalActive.value
+}
+
 </script>
 
 <template>
@@ -39,8 +45,8 @@ const dragLeaveHandler = () => {
         <span class="min-w-12 px-1 mr-2 py-1 rounded-md  bg-green-100 text-center text-xs text-green-900 ">
             +{{props.item.point}}
         </span>
-        <span class="w-28 px-1 mr-2 py-1 rounded-md  bg-[#edf0f7] text-center text-xs text-slate-800 ">
-           Start : Nov 11, 2022
+        <span class="w-20 px-1 mr-2 py-1 rounded-md  bg-[#edf0f7] text-center text-xs text-slate-800 ">
+          Nov 11, 2022
         </span>
     </div>
 
@@ -54,12 +60,19 @@ const dragLeaveHandler = () => {
         </p>
     </div>
     <div class="w-full h-10 flex justify-around items-center">
-        <button class="w-12 p-1 ml-2 rounded-md text-xs bg-[#edf0f7] text-center" >Inspect</button>
+        <button class="w-12 p-1 ml-2 rounded-md text-xs bg-[#edf0f7] text-center hover:bg-slate-300 hover:border hover:border-dashed hover:border-black" 
+        @click="modalActiveHandler"
+        >Inspect</button>
         <span class="w-12 px-1 mr-2 py-1 rounded-md  bg-yellow-100 text-center text-xs text-yellow-900 ">
            5 Days
         </span>
-        <span class="w-28 px-1 mr-2 py-1 rounded-md  bg-[#edf0f7] text-center text-xs text-slate-800 ">
-           End : Nov 11, 2022
+        <span class="w-20 flex justify-center items-center px-1 mr-2 py-1 rounded-md  bg-[#edf0f7] text-center text-xs text-slate-800 ">
+            <span class="material-symbols-outlined text-sm">
+            check_circle
+            </span>
+            <span class="mx-1">
+                0/5
+            </span>
         </span>
     </div>
 
@@ -78,9 +91,8 @@ const dragLeaveHandler = () => {
         </div>
 
     </div>
-
-
     </div>
+    <CardModal v-if="isModalActive" ></CardModal>
 </template>
 
 
