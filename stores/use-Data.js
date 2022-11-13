@@ -44,6 +44,13 @@ export const useDataStore = defineStore("data", {
             ],
             selected:"",
             isModalActive : false,
+            user : {
+                username : "",
+                password : "",
+                confirmpassword : "",
+                email : "",
+                isLogin : false
+            }
         }
     },
     actions: {
@@ -69,6 +76,13 @@ export const useDataStore = defineStore("data", {
         },
         setModalChange(){
             this.isModalActive = !this.isModalActive
+        },
+        register(data){
+            this.user.username = data.username
+            this.user.password = data.password
+            this.user.confirmpassword = data.confirmpassword
+            this.user.email = data.email
+            this.user.isLogin = true
         }
     },
     getters: {

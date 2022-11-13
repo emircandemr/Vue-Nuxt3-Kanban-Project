@@ -3,6 +3,9 @@ import {useDataStore} from '../stores/use-Data'
 
 const dataStore = useDataStore()
 
+definePageMeta({
+    layout : 'content',
+})
 
 </script>
 

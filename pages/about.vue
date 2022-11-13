@@ -1,6 +1,10 @@
 <script setup>
 import {useDataStore} from '../stores/use-Data'
 
+definePageMeta({
+    layout : 'content',
+})
+
 const dataStore = useDataStore()
 
 

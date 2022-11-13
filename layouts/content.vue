@@ -1,0 +1,27 @@
+<script setup>
+</script>
+
+<template>
+    <div class="main">
+        <Sidebar/>
+        <div class="main__content" >
+            <slot></slot>  
+        </div>
+        <Recently></Recently>
+    </div>
+</template>
+
+
+<style scoped>
+
+.main {
+    @apply w-full h-screen bg-[#edf0f7] flex items-center justify-center
+}
+
+.main__content{
+  @apply w-[75%] h-[90%] flex flex-col items-center;
+}
+
+</style>
+
+<!-- bg-[#0f0f0f] -->
