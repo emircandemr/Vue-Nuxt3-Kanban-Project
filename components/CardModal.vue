@@ -69,7 +69,8 @@ const closeHandler = () => {
 }
 
 .modal__layer {
-    @apply w-full h-full bg-black bg-opacity-20;
+    @apply w-full h-full bg-black bg-opacity-20  ;
+    backdrop-filter: blur(1px);
 }
 
 .modal__content{

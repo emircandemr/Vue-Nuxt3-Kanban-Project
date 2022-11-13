@@ -15,6 +15,7 @@
   "dependencies": {
     "@nuxtjs/composition-api": "^0.33.1",
     "@pinia/nuxt": "^0.4.3",
+    "firebase": "^9.14.0",
     "pinia": "^2.0.23"
   }
 }
