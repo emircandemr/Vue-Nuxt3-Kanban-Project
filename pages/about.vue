@@ -3,6 +3,7 @@ import {useDataStore} from '../stores/use-Data'
 
 definePageMeta({
     layout : 'content',
+    middleware : ['auth']
 })
 
 const dataStore = useDataStore()

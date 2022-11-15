@@ -20,6 +20,12 @@ export default defineNuxtConfig({
                 rel : "stylesheet" 
             },
         ],
-    }
+    },
+    publicRuntimeConfig: {
+        FIREBASE_API_KEY : process.env.FIREBASE_API_KEY,
+    },
+    privateRuntimeConfig: {
+        FIREBASE_API_KEY : process.env.FIREBASE_API_KEY,
+    },
   })
   

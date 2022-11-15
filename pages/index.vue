@@ -5,6 +5,8 @@ const dataStore = useDataStore()
 
 definePageMeta({
     layout : 'content',
+    middleware : ['auth']
+
 })
 
 </script>
