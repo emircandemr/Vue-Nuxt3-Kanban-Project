@@ -17,16 +17,15 @@ const inputValid = computed(() => {
 </script>
 
 <template>
-    <div class="w-full flex flex-col justify-center items-center">
-        <label for="email" class=" w-10/12 sm:w-1/2 mb-2 text-sm font-medium text-gray-400 ">{{props.label}}</label>
+    <div class="w-full flex flex-col justify-center items-center relative">
+        <label for="email" class="w-full absolute top-0 left-2 text-sm font-medium text-gray-400 ">{{props.label}}</label>
         <input 
         type="email"
         id="email"
         :value ="props.email"
         @input = "emailHandler"
         :class="{ 'border-red-500' : !inputValid }"
-        class="bg-gray-50 border w-10/12 sm:w-1/2 auto text-gray-900  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-2.5" />
-        <span class='w-10/12 sm:w-1/2 mb-4 mt-1 px-1 text-red-800' >{{inputValid}}</span>
+        class="w-full bg-transparent mt-3 p-2 outline-none" />
     </div>
 </template>
 
