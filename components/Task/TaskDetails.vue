@@ -1,5 +1,5 @@
 <script setup>
-import {useDataStore} from '../stores/use-Data'
+import {useDataStore} from '../../stores/use-Data'
 
 const dataStore = useDataStore()
 

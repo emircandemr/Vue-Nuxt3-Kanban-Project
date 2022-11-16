@@ -37,7 +37,7 @@ const selectFilter = computed(() => {
                 <div class="w-full mt-3 text-start">
                     <button v-for="statu in status" @click="filterHandler(statu)" class="px-3 mr-2 py-1 cursor-pointer hover:text-[#5293ee]">{{statu}}</button>
                 </div>
-                <div v-for="item in selectFilter" class="w-full h-20 mt-5 py-3 bg-[#323644] rounded-2xl flex items-center">
+                <div v-for="item in selectFilter" class="w-full h-20 mt-5 py-3 bg-[#212121] rounded-2xl flex items-center">
                     <img class="w-14 h-14 rounded-md ml-2" src="https://scontent.fszf2-1.fna.fbcdn.net/v/t39.30808-6/305204204_475940821213391_7309799711632212258_n.png?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=gqOV7P8wxlUAX_g5Mg2&_nc_ht=scontent.fszf2-1.fna&oh=00_AfCfkr_yyVhnQxU6ryziDrs1OLwAYKzbZj-mXAGXitgssQ&oe=63752353" alt="">
                     <div class="w-[50%] h-14 ml-3 flex flex-col justify-center">
                         <h2 class="text-sm">{{item.title}}</h2>
@@ -64,7 +64,7 @@ const selectFilter = computed(() => {
                     </div>
                 </div>
             </div>
-            <div class="w-[40%] h-96 mt-5 mr-8 bg-[#323644] rounded-xl flex justify-center ">
+            <div class="w-[40%] h-96 mt-5 mr-8 bg-[#212121] rounded-xl flex justify-center ">
                 <h1 class="text-white mt-2">Statistic</h1>
             </div>
         </div>

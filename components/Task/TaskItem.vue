@@ -1,9 +1,9 @@
 <script setup>
-import {useDataStore} from '../stores/use-Data'
+import {useDataStore} from '../../stores/use-Data'
 
 const dataStore = useDataStore()
 
-const props = defineProps(["item"])
+const props = defineProps(["item","statu"])
 
 const isCompleted = ref(false)
 
@@ -31,12 +31,12 @@ const modalHandler = () => {
 </script>
 
 <template>
-    <div class="w-full bg-[#323644] border border-gray-400 border-dashed pt-3 pb-1 my-2 rounded-xl text-white shadow-xl hover:border-[#0C0B0B] cursor-pointer relative"
+    <div class="w-full bg-[#212121] border border-orange-400 border-dashed pt-3 pb-1 my-2 rounded-xl text-white shadow-xl hover:border-[#0C0B0B] cursor-pointer relative"
     draggable="true"
     @dragstart="dataStore.StartDragData($event,props.item)"
     @dragenter.prevent = "dragActiveHandler"
     @dragend.prevent = "dragLeaveHandler"
-    :class="{'active' : isDragActive}">
+    :class="{'active' : isDragActive} , props.statu">
 
     <div class="w-full flex justify-around items-center ">
         <span class="w-12 ml-2 py-1 rounded-md bg-red-200 text-center text-xs text-red-800 ">
@@ -76,7 +76,7 @@ const modalHandler = () => {
         </span>
     </div>
 
-    <div v-if="props.item.isStatu=== 'Done'" class="w-full h-full absolute top-0 bg-[#323644] rounded-xl">
+    <div v-if="props.item.isStatu=== 'Done'" class="w-full h-full absolute top-0 bg-[#212121] rounded-xl">
         <div class="w-full flex justify-center items-center">
             <span class="material-symbols-outlined text-5xl font-extrabold text-gray-300">
                 done
@@ -92,7 +92,7 @@ const modalHandler = () => {
 
     </div>
     </div>
-    <CardModal v-if="dataStore.isModalActive" ></CardModal>
+    <TaskDetails v-if="dataStore.isModalActive" ></TaskDetails>
 </template>
 
 
@@ -101,6 +101,22 @@ const modalHandler = () => {
 .active{
     border: 2px dashed whitesmoke;
     background-color: #323644;
+}
+
+.Todo{
+    border: 1px dashed  #f06868;
+}
+
+.Inprogress{
+    border: 1px dashed  #f8da5b;
+}
+
+.Done{
+    border: 1px solid  #7dd87d;
+}
+
+.Backlog{
+    border: 1px dashed  #5293ee;
 }
 
 </style>

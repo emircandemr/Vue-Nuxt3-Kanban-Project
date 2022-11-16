@@ -17,11 +17,11 @@ const status = ['Backlog', 'Todo', 'Inprogress', 'Done']
         @drop="dataStore.DropData($event, statu)"
         @dragenter.prevent
         @dragover.prevent>
-            <div class="bg-[#323644] rounded-xl w-[85%] py-3 mb-3 flex justify-center items-center">
+            <div class="bg-[#212121] rounded-xl w-[85%] py-3 mb-3 flex justify-center items-center">
                 <h1 class="text-xl font-bold" :class="statu" >{{statu}}</h1>
             </div> 
             <div class="w-[85%]  flex flex-col items-center">
-                <Card v-for="data in dataStore.getData(statu)" :key="data.id" :item="data" />
+                <TaskItem v-for="data in dataStore.getData(statu)" :key="data.id" :item="data" :statu="statu" />
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@ const status = ['Backlog', 'Todo', 'Inprogress', 'Done']
 
 
 <style scoped>
-
+/* 323644 */
 .Todo{
     color:  #f06868;
 }

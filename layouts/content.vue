@@ -15,7 +15,7 @@
 <style scoped>
 
 .main {
-    @apply w-full h-screen bg-[#272a37] flex items-center justify-center
+    @apply w-full h-screen bg-[#121212] flex items-center justify-center
 }
 
 .main__content{
@@ -25,3 +25,4 @@
 </style>
 
 <!-- bg-[#0f0f0f] -->
+<!-- bg-[#272a37] -->

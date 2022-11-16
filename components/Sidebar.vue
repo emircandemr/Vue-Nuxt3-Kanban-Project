@@ -4,7 +4,7 @@
 
 <template>
     <div class="h-screen flex items-center justify-center">
-        <div class="w-28 h-[90%] bg-[#323644] shadow-2xl rounded-xl  ">
+        <div class="w-28 h-[90%] bg-[#212121] shadow-2xl rounded-xl  ">
             <div class="w-full h-20 text-2xl font-bold text-white mr-5 flex flex-col justify-center items-center mt-10 ">
                 <h1 class="text-5xl text-[#5293ee]">P.</h1>
             </div>
