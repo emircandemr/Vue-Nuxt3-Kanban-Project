@@ -3,17 +3,22 @@
 definePageMeta({
     layout : 'entry',
 })
+const router = useRouter()
+
 
 const inputValues = ref(
         {
-            name : "",
-            surname : "",
             email : "",
             password : "",
-            confirmpassword : ""
         }
     );
 
+const loginHandler = async () => {
+    const credentials = await loginUser(inputValues.value.email, inputValues.value.password)
+    if(credentials){
+        router.push({ path: "/" })
+    }
+}
 
 </script>
 
@@ -42,7 +47,7 @@ const inputValues = ref(
             </div>
         </div>
         <div class="w-[70%] mt-10 flex justify-center items-center">
-            <button class="w-1/2 px-3 py-3 bg-[#22559c] text-white rounded-xl">Login</button>
+            <button @click="loginHandler" class="w-1/2 px-3 py-3 bg-[#22559c] text-white rounded-xl">Login</button>
         </div>
     </div>
 </template>

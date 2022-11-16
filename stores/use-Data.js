@@ -32,6 +32,34 @@ export const useDataStore = defineStore("data", {
                     point : 100,
                     isStatu : "Todo"
                 },
+                {
+                    id: 5, 
+                    title: "Title 5", 
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
+                    point : 100000,
+                    isStatu : "Backlog"
+                },
+                {
+                    id: 6, 
+                    title: "Title 6", 
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", 
+                    point : 100,
+                    isStatu : "Inprogress"
+                },
+                {
+                    id: 7, 
+                    title: "Title 7", 
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", 
+                    point : 100,
+                    isStatu : "Done"
+                },
+                {
+                    id: 8, 
+                    title: "Title 8", 
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", 
+                    point : 100,
+                    isStatu : "Todo"
+                },
                 // {id: 5, title: "Title 5", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", point : 100},
                 // {id: 6, title: "Title 6", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", point : 100},
                 // {id: 7, title: "Title 7", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", point : 100},
@@ -44,13 +72,7 @@ export const useDataStore = defineStore("data", {
             ],
             selected:"",
             isModalActive : false,
-            user : {
-                username : "",
-                password : "",
-                confirmpassword : "",
-                email : "",
-                isLogin : false
-            }
+            user : {}
         }
     },
     actions: {
@@ -61,10 +83,6 @@ export const useDataStore = defineStore("data", {
             return this.data.filter(item => item.isStatu === statu)
         },
         StartDragData(event,item){
-            // const data = JSON.parse(event.dataTransfer.getData('text'))
-            // const index = this.data.findIndex(item => item.id === data.id)
-            // this.data[index].isStatu = statu
-            console.log(item)
             event.dataTransfer.dropEffect = "move";
             event.dataTransfer.effectAllowed = "move";
             event.dataTransfer.setData("id", item.id);
@@ -77,17 +95,13 @@ export const useDataStore = defineStore("data", {
         setModalChange(){
             this.isModalActive = !this.isModalActive
         },
-        register(data){
-            this.user.username = data.username
-            this.user.password = data.password
-            this.user.confirmpassword = data.confirmpassword
-            this.user.email = data.email
-            this.user.isLogin = true
+        setUser(user){
+            this.user = user
         }
     },
     getters: {
-        // getTotalPoint() {
-        //     return this.selected.reduce((a, b) => a + b.point, 0)
-        // },
+        getPoint() {
+            return this.data.filter(item => item.isStatu === "Todo").reduce((a, b) => a + b.point, 0)
+        },
     }
 })

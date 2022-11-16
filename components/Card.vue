@@ -31,7 +31,7 @@ const modalHandler = () => {
 </script>
 
 <template>
-    <div class="w-full bg-[#ffffff] border border-stone-300 border-dashed pt-3 pb-1 my-2 rounded-xl text-black drop-shadow-xl hover:border-[#0C0B0B] cursor-pointer relative"
+    <div class="w-full bg-[#323644] border border-gray-400 border-dashed pt-3 pb-1 my-2 rounded-xl text-white shadow-xl hover:border-[#0C0B0B] cursor-pointer relative"
     draggable="true"
     @dragstart="dataStore.StartDragData($event,props.item)"
     @dragenter.prevent = "dragActiveHandler"
@@ -51,16 +51,16 @@ const modalHandler = () => {
     </div>
 
     <div class="w-full h-12 mt-2 px-3 py-1 ">
-        <h1 class="text-sm font-bold text-slate-600">
+        <h1 class="text-sm font-bold text-gray-200">
             {{props.item.title}}
         </h1>
 
-        <p class="text-xs truncate text-slate-900">
+        <p class="text-xs truncate text-gray-300">
             {{props.item.description}}
         </p>
     </div>
     <div class="w-full h-10 flex justify-around items-center">
-        <button class="w-12 p-1 ml-2 rounded-md text-xs bg-[#edf0f7] text-center hover:bg-slate-300 hover:border hover:border-dashed hover:border-black" 
+        <button class="w-12 p-1 ml-2 rounded-md text-xs bg-[#edf0f7] text-center text-black hover:bg-slate-300 hover:border hover:border-dashed hover:border-black" 
         @click="modalHandler"
         >Inspect</button>
         <span class="w-12 px-1 mr-2 py-1 rounded-md  bg-yellow-100 text-center text-xs text-yellow-900 ">
@@ -76,18 +76,18 @@ const modalHandler = () => {
         </span>
     </div>
 
-    <div v-if="props.item.isStatu=== 'Done'" class="w-full h-full absolute top-0 bg-white rounded-xl">
+    <div v-if="props.item.isStatu=== 'Done'" class="w-full h-full absolute top-0 bg-[#323644] rounded-xl">
         <div class="w-full flex justify-center items-center">
-            <span class="material-symbols-outlined text-5xl font-extrabold text-slate-700">
+            <span class="material-symbols-outlined text-5xl font-extrabold text-gray-300">
                 done
             </span>
         </div>
         <div class="w-full px-3">
-            <h1 class="text-md text-slate-700 font-bold text-center">Congratulations !</h1>
-            <p class="text-xs text-slate-800 truncate mt-2 font-semibold text-center">You earned {{props.item.point}} points for completing the mission</p>
+            <h1 class="text-md text-gray-200 font-bold text-center">Congratulations !</h1>
+            <p class="text-xs text-gray-200 truncate mt-2 font-semibold text-center">You earned {{props.item.point}} points for completing the mission</p>
         </div>
         <div class="w-full h-10 flex justify-center items-center ">
-            <button class="w-12 py-1 rounded-md text-xs bg-[#edf0f7] text-center" >Review</button>
+            <button class="w-12 py-1 rounded-md text-xs bg-[#edf0f7] text-black text-center" >Review</button>
         </div>
 
     </div>
@@ -99,8 +99,8 @@ const modalHandler = () => {
 <style scoped>
 
 .active{
-    border: 2px dashed #0C0B0B;
-    background-color: #edf0f7;
+    border: 2px dashed whitesmoke;
+    background-color: #323644;
 }
 
 </style>

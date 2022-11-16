@@ -1,7 +1,7 @@
 <script setup>
 import {computed, ref} from 'vue'
 
-const props = defineProps(["label","password"])
+const props = defineProps(["label","password","type"])
 const emits = defineEmits(["update:password"])
 
 const passwordHandler = (e) => {
@@ -33,7 +33,7 @@ const inputValid = computed(() => {
     <div class="w-full flex flex-col justify-center items-center relative">
         <label for="password" class="w-full absolute top-0 left-2 text-sm font-medium text-gray-400 ">{{props.label}}</label>
         <input 
-        type="password"
+        :type="props.type"
         id="password"
         :value ="props.password"
         @input = "passwordHandler"
