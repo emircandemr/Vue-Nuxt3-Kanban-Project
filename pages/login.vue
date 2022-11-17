@@ -5,16 +5,61 @@ definePageMeta({
 })
 const router = useRouter()
 
+const emailValid = computed(() => {
+    const select = inputs.value.filter((item) => item.label == "Email")
+    return (/^[a-zA-Z]+[a-zA-Z0-9_.]+@[a-zA-Z.]+[a-zA-Z]$/).test(select[0].value)
 
-const inputValues = ref(
-        {
-            email : "",
-            password : "",
-        }
-    );
+})
+
+const passwordValid = computed(() => {
+    const password = inputs.value.filter((item) => item.label == "Password")[0].value
+    if(password.length < 8){
+        return "Password must contain at least 8 characters"
+    }
+    if(!password.match(/[A-Z]/)){
+        return "Password must contain at least one uppercase letter"
+    }
+    if(!password.match(/[a-z]/)){
+        return "Password must contain at least one lowercase letter"
+    }
+    if(!password.match(/[0-9]/)){
+        return "Password must contain at least one number"
+    }
+    if(!password.match(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/)){
+        return "Password must contain at least one special character"
+    }
+    return true
+})
+
+const typeHandler = () => {
+    const password = inputs.value.filter((item) => item.label == "Password")[0]
+    password.type = password.type == "password" ? "text" : "password"
+    password.icon = password.icon == "visibility" ? "visibility_off" : "visibility"
+}
+
+
+const inputs = ref([
+{
+    label : "Email",
+    type : "email",
+    value : "",
+    icon : "email",
+    handle : emailValid
+},
+{
+    label : "Password",
+    type : "password",
+    value : "",
+    handler : typeHandler,
+    icon : "visibility",
+    handle : passwordValid 
+},
+]) 
 
 const loginHandler = async () => {
-    const credentials = await loginUser(inputValues.value.email, inputValues.value.password)
+    const email = inputs.value.filter((item) => item.label == "Email")[0].value
+    const password = inputs.value.filter((item) => item.label == "Password")[0].value
+    const credentials = await loginUser(email, password)
     if(credentials){
         router.push({ path: "/" })
     }
@@ -33,16 +78,18 @@ const loginHandler = async () => {
             </NuxtLink> </span>
         </div>
         <div class="w-[70%] ">
-            <div class="w-full mt-5 flex justify-center items-center border border-[#2772db] text-white outline-none  text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 px-2 py-1">
-                    <InputEmail v-model:email="inputValues.email" label="Email" > </InputEmail>
-                    <span class="material-symbols-outlined text-2xl text-gray-400">
-                        email
-                    </span>
-            </div>
-            <div class="w-full mt-5 flex justify-center items-center border border-[#2772db] text-white outline-none  text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 px-2 py-1">
-                <InputPassword v-model:password="inputValues.password" label="Password" > </InputPassword>
-                <span class="material-symbols-outlined text-2xl text-gray-400 cursor-pointer">
-                    visibility
+            <div 
+            v-for="input in inputs" 
+            :key="input.label" 
+            class="w-full mt-5 flex justify-center items-center border border-[#2772db] text-white outline-none  text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 px-2 py-1"
+            :class="{'border-green-800' : input.handle === true }">
+                <SharedInput 
+                    v-model:value="input.value" 
+                    :label="input.label" 
+                    :type="input.type" > 
+                </SharedInput>
+                <span @click="input.handler" class="material-symbols-outlined text-2xl text-gray-400 cursor-pointer">
+                    {{input.icon}}
                 </span>
             </div>
         </div>

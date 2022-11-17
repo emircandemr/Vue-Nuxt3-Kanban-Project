@@ -10,66 +10,114 @@ definePageMeta({
 
 const firebaseUser = useFirebaseUser()
 
-const inputValues = ref(
-        {
-            name : "",
-            surname : "",
-            email : "",
-            password : "",
-        }
-    );
+// const register = async () => {
+//     try {
+//         const user = await firebase.auth().createUserWithEmailAndPassword(inputValues.value.email,inputValues.value.password)
+//         await user.user.updateProfile({
+//             displayName : inputValues.value.name + " " + inputValues.value.surname
+//         })
+//         await firebase.firestore().collection("users").doc(user.user.uid).set({
+//             name : inputValues.value.name,
+//             surname : inputValues.value.surname,
+//             email : inputValues.value.email,
+//             password : inputValues.value.password,
+//             uid : user.user.uid,
+//             photoURL : user.user.photoURL,
+//             tasks : []
+//         })
+//         await firebase.auth().signOut()
+//         router.push("/login")
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
 
 const nameValid = computed(() => {
-    return inputValues.value.name.length > 2
+    const select = inputs.value.filter((item) => item.label == "Name")
+    return select[0].value.length > 2
 })
 
 const surnameValid = computed(() => {
-    return inputValues.value.surname.length > 2
+    const select = inputs.value.filter((item) => item.label == "Surname")
+    return select[0].value.length > 2
 })
 
 const emailValid = computed(() => {
-    return (/^[a-zA-Z]+[a-zA-Z0-9_.]+@[a-zA-Z.]+[a-zA-Z]$/).test(inputValues.value.email)
+    const select = inputs.value.filter((item) => item.label == "Email")
+    return (/^[a-zA-Z]+[a-zA-Z0-9_.]+@[a-zA-Z.]+[a-zA-Z]$/).test(select[0].value)
 
 })
 
 const passwordValid = computed(() => {
-    if(inputValues.value.password.length < 8){
+    const password = inputs.value.filter((item) => item.label == "Password")[0].value
+    if(password.length < 8){
         return "Password must contain at least 8 characters"
     }
-    if(!inputValues.value.password.match(/[A-Z]/)){
+    if(!password.match(/[A-Z]/)){
         return "Password must contain at least one uppercase letter"
     }
-    if(!inputValues.value.password.match(/[a-z]/)){
+    if(!password.match(/[a-z]/)){
         return "Password must contain at least one lowercase letter"
     }
-    if(!inputValues.value.password.match(/[0-9]/)){
+    if(!password.match(/[0-9]/)){
         return "Password must contain at least one number"
     }
-    if(!inputValues.value.password.match(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/)){
+    if(!password.match(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/)){
         return "Password must contain at least one special character"
     }
-    return 
+    return true
 })
-const type = ref("password")
 
 const typeHandler = () => {
-    type.value = type.value === "password" ? "text" : "password"
+    const password = inputs.value.filter((item) => item.label == "Password")[0]
+    password.type = password.type == "password" ? "text" : "password"
+    password.icon = password.icon == "visibility" ? "visibility_off" : "visibility"
 }
 
 const formValid = computed(() => {
       return  nameValid.value && surnameValid.value && emailValid.value && !passwordValid.value
 })
 
+const inputs = ref([
+    {
+        label : "Name",
+        type : "text",
+        value : "",
+        icon : "person",
+        handle : nameValid 
+    },
+    {
+        label : "Surname",
+        type : "text",
+        value : "",
+        icon : "person",
+        handle : surnameValid
+    },
+    {
+        label : "Email",
+        type : "email",
+        value : "",
+        icon : "email",
+        handle : emailValid
+    },
+    {
+        label : "Password",
+        type : "password",
+        value : "",
+        handler : typeHandler,
+        icon : "visibility",
+        handle : passwordValid 
+    },
+]) 
 
 const registerHandler = async () => {
-    await createUser(inputValues.value.email , inputValues.value.password)
+    const email = inputs.value.filter((item) => item.label == "Email")[0].value
+    const password = inputs.value.filter((item) => item.label == "Password")[0].value
+    await createUser(email , password)
     router.push({ path: "/login" })
-    inputValues.value = {...inputValues.value , uid : firebaseUser.value.uid}
-    dataStore.setUser(inputValues.value)
     // await loginUser(email, password)
     // // authStore.setUser(inputValues.value)
 }
-
 
 </script>
 
@@ -81,40 +129,25 @@ const registerHandler = async () => {
             <span class="text-sm mt-5 text-gray-400">Already A Member ? 
             <NuxtLink to="/login">
                 <span class="text-[#2772db] underline decoration-dotted ">Login</span>
-            </NuxtLink> </span>
+            </NuxtLink> 
+        </span>
         </div>
         <div class="w-[70%] ">
-            <div class="w-full flex justify-start items-center">
-                <div ref="name" class="w-1/2 flex justify-center items-center shadow-2xl border border-[#2772db] text-white outline-none  text-sm rounded-xl px-2 py-1"
-                :class="{'border-green-800' : nameValid}">
-                    <Input v-model:name="inputValues.name" label="Name" > </Input>
-                    <span class="material-symbols-outlined text-2xl text-gray-400">
-                        person
-                    </span>
-                </div>
-                <div class="w-1/2 flex ml-5 justify-center items-center border border-[#2772db] text-white outline-none  text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 px-2 py-1"
-                :class="{'border-green-800' : surnameValid}">
-                    <Input v-model:name="inputValues.surname" label="Last Name " > </Input>
-                    <span class="material-symbols-outlined text-2xl text-gray-400">
-                        person
-                    </span>
-                </div>
-            </div>
-            <div class="w-full mt-5 flex justify-center items-center border border-[#2772db] text-white outline-none  text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 px-2 py-1"
-            :class="{'border-green-800' : emailValid }">
-                    <InputEmail v-model:email="inputValues.email" label="Email" > </InputEmail>
-                    <span class="material-symbols-outlined text-2xl text-gray-400">
-                        email
-                    </span>
-            </div>
-            <div class="w-full mt-5 flex justify-center items-center border border-[#2772db] text-white outline-none  text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 px-2 py-1"
-            :class="{'border-green-800' : !passwordValid}">
-                <InputPassword v-model:password="inputValues.password" label="Password" :type="type" > </InputPassword>
-                <span  @click="typeHandler" class="material-symbols-outlined text-2xl text-gray-400 cursor-pointer">
-                    visibility
+            <div 
+            v-for="input in inputs" 
+            :key="input.label" 
+            class="w-full mt-5 flex justify-center items-center border border-[#2772db] text-white outline-none  text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 px-2 py-1"
+            :class="{'border-green-800' : input.handle === true }">
+                <SharedInput 
+                    v-model:value="input.value" 
+                    :label="input.label" 
+                    :type="input.type" > 
+                </SharedInput>
+                <span @click="input.handler" class="material-symbols-outlined text-2xl text-gray-400 cursor-pointer">
+                    {{input.icon}}
                 </span>
             </div>
-            <span class="text-red-800 px-2 mt-1 text-xs">{{passwordValid}}</span>
+            <span v-if="passwordValid !== true" class="text-red-800 px-2 mt-1 text-xs">{{passwordValid}}</span> 
         </div>
         <div class="w-[70%] mt-10 flex justify-center items-center">
             <button @click="registerHandler" 
@@ -124,7 +157,6 @@ const registerHandler = async () => {
         </div>
     </div>
 </template>
-
 
 <style scoped>
 

@@ -11,7 +11,7 @@ definePageMeta({
 
 const status = ['All', 'Todo', 'Inprogress', 'Done']
 
-const selectedStatus = ref('Todo')
+const selectedStatus = ref('All')
 
 const filterHandler = (data) => {
     selectedStatus.value = data
@@ -22,7 +22,7 @@ const selectFilter = computed(() => {
         if(selectedStatus.value === 'All'){
             return item
         }
-        return item.isStatu === selectedStatus.value
+        return item.statu === selectedStatus.value
     })
 })
 
@@ -56,7 +56,7 @@ const selectFilter = computed(() => {
                         star
                         </span>
                         <span class="mt-1 text-xs ">
-                        {{item.isStatu}}
+                        {{item.category}}
                         </span>
                     </div>
                     <div class="w-[10%] h-8 rounded-lg bg-[#22559c]  cursor-pointer ml-5 text-sm flex items-center justify-center">

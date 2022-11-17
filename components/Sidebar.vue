@@ -29,6 +29,15 @@
                         </NuxtLink>
                     </li>
                     <li class="my-5 py-3 px-5 rounded-lg hover:bg-[#5293ee] hover:text-black">
+                        <NuxtLink  to="/newTask" class="flex" >
+                            <div class="flex justify-center items-center">
+                                <span class="material-symbols-outlined">
+                                add
+                                </span>
+                            </div>
+                        </NuxtLink>
+                    </li>
+                    <li class="my-5 py-3 px-5 rounded-lg hover:bg-[#5293ee] hover:text-black">
                         <NuxtLink  to="/login" class="flex" >
                             <div class="flex justify-center items-center">
                                 <span class="material-symbols-outlined">

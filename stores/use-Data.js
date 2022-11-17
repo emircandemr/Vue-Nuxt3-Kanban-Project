@@ -5,70 +5,41 @@ export const useDataStore = defineStore("data", {
         return {
             data: [
                 {
-                    id: 1, 
-                    title: "Title 1", 
-                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
-                    point : 100000,
-                    isStatu : "Backlog"
-                },
-                {
-                    id: 2, 
-                    title: "Title 2", 
-                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", 
+                    id: 1,
+                    title: "First Item",
+                    description: "This is the first item",
+                    category : "High",
+                    statu: "Backlog",
+                    date: "2021-01-01",
+                    image : "https://picsum.photos/200/300",
                     point : 100,
-                    isStatu : "Inprogress"
+                    memberCount : 3,
+                    member : [ "John", "Jane", "Jack", "Jill", "Jenny" ]
                 },
                 {
-                    id: 3, 
-                    title: "Title 3", 
-                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", 
-                    point : 100,
-                    isStatu : "Done"
+                    id: 2,
+                    title: "Second Item",
+                    description: "This is the second item",
+                    category : "Medium",
+                    statu: "Backlog",
+                    date: "2021-01-02",
+                    image : "https://picsum.photos/200/300",
+                    point : 200,
+                    memberCount : 2,
+                    member : [ "John", "Jane" ]
                 },
                 {
-                    id: 4, 
-                    title: "Title 4", 
-                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", 
-                    point : 100,
-                    isStatu : "Todo"
+                    id: 3,
+                    title: "Third Item",
+                    description: "This is the third item",
+                    category : "Low",
+                    statu: "Backlog",
+                    date: "2021-01-03",
+                    image : "https://picsum.photos/200/300",
+                    point : 300,
+                    memberCount : 1,
+                    member : [ "John" ]
                 },
-                {
-                    id: 5, 
-                    title: "Title 5", 
-                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
-                    point : 100000,
-                    isStatu : "Backlog"
-                },
-                {
-                    id: 6, 
-                    title: "Title 6", 
-                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", 
-                    point : 100,
-                    isStatu : "Inprogress"
-                },
-                {
-                    id: 7, 
-                    title: "Title 7", 
-                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", 
-                    point : 100,
-                    isStatu : "Done"
-                },
-                {
-                    id: 8, 
-                    title: "Title 8", 
-                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", 
-                    point : 100,
-                    isStatu : "Todo"
-                },
-                // {id: 5, title: "Title 5", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", point : 100},
-                // {id: 6, title: "Title 6", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", point : 100},
-                // {id: 7, title: "Title 7", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", point : 100},
-                // {id: 8, title: "Title 8", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", point : 100},
-                // {id: 9, title: "Title 9", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", point : 100},
-                // {id: 10, title: "Title 10", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", point : 100},
-                // {id: 11, title: "Title 11", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", point : 100},
-                // {id: 12, title: "Title 12", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ", point : 100},
-
             ],
             selected:"",
             isModalActive : false,
@@ -80,7 +51,7 @@ export const useDataStore = defineStore("data", {
             this.selected = data
         },
         getData(statu){
-            return this.data.filter(item => item.isStatu === statu)
+            return this.data.filter(item => item.statu === statu)
         },
         StartDragData(event,item){
             event.dataTransfer.dropEffect = "move";
@@ -90,18 +61,21 @@ export const useDataStore = defineStore("data", {
         DropData(event,statu){
             const itemID = event.dataTransfer.getData("id");
             const index = this.data.findIndex(item => item.id === parseInt(itemID))
-            this.data[index].isStatu = statu
+            this.data[index].statu = statu
         },
         setModalChange(){
             this.isModalActive = !this.isModalActive
         },
         setUser(user){
             this.user = user
-        }
+        },
+        addTask(data){
+            this.data.push(data)
+        },
     },
     getters: {
         getPoint() {
-            return this.data.filter(item => item.isStatu === "Todo").reduce((a, b) => a + b.point, 0)
+            return this.data.filter(item => item.statu === "Done").reduce((a, b) => a + b.point, 0)
         },
     }
 })
