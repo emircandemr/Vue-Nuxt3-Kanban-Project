@@ -150,10 +150,11 @@ const registerHandler = async () => {
             <span v-if="passwordValid !== true" class="text-red-800 px-2 mt-1 text-xs">{{passwordValid}}</span> 
         </div>
         <div class="w-[70%] mt-10 flex justify-center items-center">
-            <button @click="registerHandler" 
+            <SharedButton text="Create New Account" :handler="registerHandler"  :class="{'bg-green-800 cursor-pointer hover:bg-green-700' : formValid, 'cursor-not-allowed bg-[#22559c]' : !formValid }" ></SharedButton>
+            <!-- <button @click="registerHandler" 
             :disabled= !formValid
             :class="{'bg-green-800 cursor-pointer hover:bg-green-700' : formValid, 'cursor-not-allowed bg-[#22559c]' : !formValid }"
-            class="w-1/2 px-3 py-3  text-white rounded-xl ">Create New Account</button>
+            class="w-1/2 px-3 py-3  text-white rounded-xl ">Create New Account</button> -->
         </div>
     </div>
 </template>
