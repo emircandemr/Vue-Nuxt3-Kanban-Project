@@ -3,7 +3,7 @@
 defineProps({
     icon : {
         type : String,
-        required : true,
+        required : false,
         default : "home"
     },
     size : {
@@ -14,7 +14,7 @@ defineProps({
     color : {
         type : String,
         required : false,
-        default : "text-gray-500"
+        default : "text-black"
     },
     handler : {
         type : Function,

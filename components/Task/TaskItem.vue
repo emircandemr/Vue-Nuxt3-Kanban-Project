@@ -19,9 +19,6 @@ const modalHandler = () => {
     dataStore.setModalChange()
     dataStore.setSelectedData(props.item)
 }
-
-// 2d2d2d
-
 </script>
 
 <template>
@@ -94,7 +91,6 @@ const modalHandler = () => {
     </TaskDone>
     
 </div>
-    <TaskDetails v-if="dataStore.isModalActive" ></TaskDetails>
 </template>
 
 

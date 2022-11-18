@@ -24,6 +24,8 @@ const status = ['Backlog', 'Todo', 'Inprogress', 'Done']
                 <TaskItem v-for="data in dataStore.getData(statu)" :key="data.id" :item="data" :statu="statu" />
             </div>
         </div>
+    <TaskDetails v-if="dataStore.isModalActive" ></TaskDetails>
+
     </div>
 </template>
 

@@ -2,7 +2,7 @@
 
 defineProps({
     text : {
-        required : true,
+        required : false,
     },
     size : {
         type : String,
