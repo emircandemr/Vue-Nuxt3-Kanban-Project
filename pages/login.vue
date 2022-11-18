@@ -88,9 +88,12 @@ const loginHandler = async () => {
                     :label="input.label" 
                     :type="input.type" > 
                 </SharedInput>
-                <span @click="input.handler" class="material-symbols-outlined text-2xl text-gray-400 cursor-pointer">
-                    {{input.icon}}
-                </span>
+                <SharedIcon
+                :icon="input.icon"
+                :handler="typeHandler"
+                color="text-gray-400"
+                size="text-2xl">
+                </SharedIcon>
             </div>
         </div>
         <div class="w-[70%] mt-10 flex justify-center items-center">

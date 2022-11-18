@@ -6,6 +6,11 @@ defineProps({
         required : true,
         default : "Button"
     },
+    class: {
+        type : String,
+        required : false,
+        default : "w-1/2 px-3 py-3 bg-[#22559c] text-white"
+    },
     handler : {
         type : Function,
         required : false,
@@ -15,7 +20,11 @@ defineProps({
 
 </script>
 <template>
-    <button @click="handler" class="w-1/2 px-3 py-3 bg-[#22559c] text-white rounded-xl">{{text}}</button>
+    <button 
+    @click="handler" 
+    :class="class">
+    {{text}}
+    </button>
 </template>
 
 

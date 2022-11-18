@@ -143,18 +143,20 @@ const registerHandler = async () => {
                     :label="input.label" 
                     :type="input.type" > 
                 </SharedInput>
-                <span @click="input.handler" class="material-symbols-outlined text-2xl text-gray-400 cursor-pointer">
-                    {{input.icon}}
-                </span>
+                <SharedIcon
+                :icon="input.icon"
+                :handler="typeHandler"
+                color="text-gray-400"
+                size="text-2xl">
+                </SharedIcon>
             </div>
             <span v-if="passwordValid !== true" class="text-red-800 px-2 mt-1 text-xs">{{passwordValid}}</span> 
         </div>
         <div class="w-[70%] mt-10 flex justify-center items-center">
-            <SharedButton text="Create New Account" :handler="registerHandler"  :class="{'bg-green-800 cursor-pointer hover:bg-green-700' : formValid, 'cursor-not-allowed bg-[#22559c]' : !formValid }" ></SharedButton>
-            <!-- <button @click="registerHandler" 
+            <button @click="registerHandler" 
             :disabled= !formValid
             :class="{'bg-green-800 cursor-pointer hover:bg-green-700' : formValid, 'cursor-not-allowed bg-[#22559c]' : !formValid }"
-            class="w-1/2 px-3 py-3  text-white rounded-xl ">Create New Account</button> -->
+            class="w-1/2 px-3 py-3  text-white rounded-xl ">Create New Account</button>
         </div>
     </div>
 </template>
