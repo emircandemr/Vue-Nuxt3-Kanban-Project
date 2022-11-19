@@ -14,7 +14,8 @@ export const useDataStore = defineStore("data", {
                     image : "https://picsum.photos/200/300",
                     point : 100,
                     memberCount : 3,
-                    member : [ "John", "Jane", "Jack", "Jill", "Jenny" ]
+                    member : [ "John", "Jane", "Jack", "Jill", "Jenny" ],
+                    isFavorite : false
                 },
                 {
                     id: 2,
@@ -26,7 +27,9 @@ export const useDataStore = defineStore("data", {
                     image : "https://picsum.photos/200/300",
                     point : 200,
                     memberCount : 2,
-                    member : [ "John", "Jane" ]
+                    member : [ "John", "Jane" ],
+                    isFavorite : false
+
                 },
                 {
                     id: 3,
@@ -38,7 +41,8 @@ export const useDataStore = defineStore("data", {
                     image : "https://picsum.photos/200/300",
                     point : 300,
                     memberCount : 1,
-                    member : [ "John" ]
+                    member : [ "John" ],
+                    isFavorite : true
                 },
             ],
             selected:"",
@@ -72,6 +76,10 @@ export const useDataStore = defineStore("data", {
         addTask(data){
             this.data.push(data)
         },
+        setFavorite(id){
+            const index = this.data.findIndex(item => item.id === id)
+            this.data[index].isFavorite = !this.data[index].isFavorite
+        }
     },
     getters: {
         getPoint() {

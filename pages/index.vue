@@ -46,7 +46,6 @@ const selectFilter = computed(() => {
                     </SharedButton>
                 </div>
                 <CardList v-for="task in selectFilter" :task="task"  ></CardList>
-                
             </div>
             <Statistic></Statistic>
         </div>

@@ -14,7 +14,7 @@ const cardData = [
     {
         icon:"star",
         text: props.task.category,
-        color : "text-yellow-800"
+        color : "text-[#d4af37]"
     }
 ]
 
