@@ -11,10 +11,6 @@ const dragActiveHandler = () => {
     isDragActive.value = !isDragActive.value
 }
 
-const selectFavorite = (id) => {
-    dataStore.setFavorite(id)
-}
-
 // const dragLeaveHandler = () => {
 //     isDragActive.value = false
 // }
@@ -74,7 +70,7 @@ const modalHandler = () => {
             <SharedIcon 
             icon="star"
             size="text-md"
-            :handler= "() => selectFavorite(props.item.id)"
+            :handler= "() => dataStore.setFavorite(props.item.id)"
             :color='(props.item.isFavorite ? "text-[#d4af37]" : "text-gray-500")'>
             </SharedIcon>
         </Badge>

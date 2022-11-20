@@ -85,5 +85,11 @@ export const useDataStore = defineStore("data", {
         getPoint() {
             return this.data.filter(item => item.statu === "Done").reduce((a, b) => a + b.point, 0)
         },
+        getCompletedTask () {
+            return this.data.filter(item => item.statu === "Done").length
+        },
+        getNotCompletedTask () {
+            return this.data.filter(item => item.statu !== "Done").length
+        },
     }
 })
