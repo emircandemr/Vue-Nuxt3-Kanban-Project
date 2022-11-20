@@ -12,7 +12,7 @@ export const useDataStore = defineStore("data", {
                     statu: "Backlog",
                     date: "2021-01-01",
                     image : "https://picsum.photos/200/300",
-                    point : 100,
+                    point : 1000,
                     memberCount : 3,
                     member : [ "John", "Jane", "Jack", "Jill", "Jenny" ],
                     isFavorite : false

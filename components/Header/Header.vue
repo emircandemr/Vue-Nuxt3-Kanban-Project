@@ -29,19 +29,14 @@ const taskData = [
                 </div>
             </div>
             <div class="header__avatar">
-                <div class="h-10 flex justify-center items-center ">
+                <div class="h-8 flex justify-center items-center ">
                     <div class="h-10 w-10 bg-[#212121] text-white font-medium rounded-xl flex justify-center items-center mr-2">
-                        <span class="text-3xl text-white material-symbols-outlined ">
-                        notifications
-                        </span>
+                        <SharedIcon icon="notifications" size="text-3xl" color="text-gray-300" />
                     </div>
-                    <div class="w-10 h-10">
-                        <img class="w-full h-full rounded-xl" src="https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg?w=826&t=st=1668283720~exp=1668284320~hmac=584615e5790ead5e664a57a86b1db4b267ff358a1fcd9a293b074874ee25fd67" alt="">
-                    </div>
+                    <SharedAvatar size="h-10 w-10" />
                 </div>
-                <div class="w-full h-24 m-1 bg-[#212121] text-white font-medium rounded-xl flex flex-col items-center justify-center "   >
-                    <span class=" w-3/5 text-center text-xl font-semibold ">Your Point</span>    
-                    <span class=" text-3xl font-extrabold ">{{dataStore.getPoint}}</span>
+                <div class="w-full h-32 flex items-center justify-around mt-4"   >
+                    <HeaderTask title="Your Total Point" :number="dataStore.getPoint"></HeaderTask>
                 </div>
             </div>
     </div>
