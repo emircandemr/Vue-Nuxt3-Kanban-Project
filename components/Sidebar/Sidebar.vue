@@ -38,7 +38,7 @@
                         </NuxtLink>
                     </li>
                     <li class="my-5 py-3 px-5 rounded-lg hover:bg-[#5293ee] hover:text-black">
-                        <NuxtLink  to="/login" class="flex" >
+                        <NuxtLink  to="/login" class="flex" @click="signOut" >
                             <div class="flex justify-center items-center">
                                 <span class="material-symbols-outlined">
                                 logout

@@ -4,9 +4,9 @@ export default defineNuxtPlugin( () => {
 
         console.log("middleware",$auth?.currentUser)
 
-        // if (!$auth?.currentUser) {
-        //     return navigateTo('/login')
-        // }
+        if (!$auth?.currentUser) {
+            return navigateTo('/login')
+        }
     }) 
 
 })

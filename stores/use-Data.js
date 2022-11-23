@@ -19,14 +19,6 @@ export const useDataStore = defineStore("data", {
                     point : 1000,
                     memberCount : 3,
                     member : { 
-                        // eej6g0hBVjhoKP9CrVaBO2mDXT93 : {
-                        //     name : "John Doe",
-                        //     statu : "Todo",
-                        // },
-                        // zp16215zqHgjbepL2xZg5t0NZQf2 : {
-                        //     name : "Jane Doe",
-                        //     statu : "Inprogress" || "Backlog",
-                        // }
                     }
                 },
                 {
@@ -81,7 +73,7 @@ export const useDataStore = defineStore("data", {
         setModalChange(){
             this.isModalActive = !this.isModalActive
         },
-        setUser(){
+        setUserToData(){
             this.data = this.data.map(item => {
                 item.member = this.user.reduce((acc,cur) => {
                     acc[cur.id] = {
@@ -92,6 +84,9 @@ export const useDataStore = defineStore("data", {
                 },{})
                 return item
             })
+        },
+        setUser(user){
+            this.user.push(user)
         },
         addTask(data){
             this.data.push(data)

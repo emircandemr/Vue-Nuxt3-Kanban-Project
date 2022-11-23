@@ -65,7 +65,7 @@ const passwordValid = computed(() => {
     if(!password.match(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/)){
         return "Password must contain at least one special character"
     }
-    return true
+    return Boolean(true)
 })
 
 const typeHandler = () => {
@@ -75,7 +75,7 @@ const typeHandler = () => {
 }
 
 const formValid = computed(() => {
-      return  nameValid.value && surnameValid.value && emailValid.value && !passwordValid.value
+      return  nameValid.value && surnameValid.value && emailValid.value && passwordValid.value == true
 })
 
 const inputs = ref([
@@ -114,6 +114,13 @@ const registerHandler = async () => {
     const email = inputs.value.filter((item) => item.label == "Email")[0].value
     const password = inputs.value.filter((item) => item.label == "Password")[0].value
     await createUser(email , password)
+    dataStore.setUser(
+        {
+            name : inputs.value.filter((item) => item.value)[0].value,
+            id : firebaseUser.value.uid,
+        }   
+        )
+    console.log(dataStore.user)
     router.push({ path: "/login" })
     // await loginUser(email, password)
     // // authStore.setUser(inputValues.value)
@@ -123,6 +130,7 @@ const registerHandler = async () => {
 
 <template>
     <div class="w-2/5 h-3/4 ml-10 p-5  flex flex-col justify-center items-center ">
+        {{formValid}}
         <div class="w-[70%] mb-5 ">
             <p class="text-gray-400 text-sm">START FOR FREE</p>
             <h1 class="text-5xl mb-3 mt-3 text-white">Create new  <span class="text-5xl font-bold text-[#2772db]" >account</span> . </h1>
@@ -153,7 +161,7 @@ const registerHandler = async () => {
             <span v-if="passwordValid !== true" class="text-red-800 px-2 mt-1 text-xs">{{passwordValid}}</span> 
         </div>
         <div class="w-[70%] mt-10 flex justify-center items-center">
-            <button @click="registerHandler" 
+            <button @click=registerHandler
             :disabled= !formValid
             :class="{'bg-green-800 cursor-pointer hover:bg-green-700' : formValid, 'cursor-not-allowed bg-[#22559c]' : !formValid }"
             class="w-1/2 px-3 py-3  text-white rounded-xl ">Create New Account</button>

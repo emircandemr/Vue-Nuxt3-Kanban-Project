@@ -7,7 +7,7 @@ definePageMeta({
 })
 
 onMounted(() => {
-    dataStore.setUser()
+    dataStore.setUserToData()
 })
 
 
@@ -21,7 +21,7 @@ const status = ['Backlog', 'Todo', 'Inprogress', 'Done']
 </script>
 <template>
     <div class="w-full h-full flex flex-wrap justify-center items-center text-white">
-        <ul  v-for="item in dataStore.data" >
+        <ul  v-for="item in dataStore.user" >
             <li>{{item}}</li>
         </ul>
         <div v-for="statu in status" class="w-1/4 p-5 h-full flex flex-col items-center"
