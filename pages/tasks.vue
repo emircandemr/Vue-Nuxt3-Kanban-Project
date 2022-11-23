@@ -6,24 +6,20 @@ definePageMeta({
     middleware : ['auth']
 })
 
-onMounted(() => {
-    dataStore.setUserToData()
-})
-
 
 const dataStore = useDataStore()
 const firebaseUser = useFirebaseUser()
-// const userID = firebaseUser.value?.uid
-const userID = "eej6g0hBVjhoKP9CrVaBO2mDXT93"
+const userID = firebaseUser.value?.uid
+// const userID = "eej6g0hBVjhoKP9CrVaBO2mDXT93"
 
+onMounted(() => {
+    dataStore.setUserToData(userID)
+})
 const status = ['Backlog', 'Todo', 'Inprogress', 'Done']
 
 </script>
 <template>
     <div class="w-full h-full flex flex-wrap justify-center items-center text-white">
-        <ul  v-for="item in dataStore.user" >
-            <li>{{item}}</li>
-        </ul>
         <div v-for="statu in status" class="w-1/4 p-5 h-full flex flex-col items-center"
         @drop="dataStore.DropData($event, statu,userID)"
         @dragenter.prevent

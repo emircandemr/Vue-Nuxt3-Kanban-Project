@@ -17,14 +17,14 @@ const inputData = ref({
     image : 'https://scontent.fszf2-1.fna.fbcdn.net/v/t39.30808-6/305204204_475940821213391_7309799711632212258_n.png?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=gqOV7P8wxlUAX_g5Mg2&_nc_ht=scontent.fszf2-1.fna&oh=00_AfCfkr_yyVhnQxU6ryziDrs1OLwAYKzbZj-mXAGXitgssQ&oe=63752353' ,
     point : '',
     memberCount : '',
-    members : {},
+    member : {},
 })
 
 
 const addMember = (e) => {
     dataStore.user.filter((item) => {
         if(item.id == e.target.value){
-            inputData.value.members[e.target.value] = {
+            inputData.value.member[e.target.value] = {
                 name : item.name,
                 statu : "Todo"
             }
@@ -36,6 +36,12 @@ const addMember = (e) => {
     // }
 }
 
+const members = computed(() => {
+    if(inputData.value.member){
+        return Object.values(inputData.value.member)
+    }
+})
+
 const addTask = () => {
     dataStore.addTask(inputData.value)
     inputData.value = {
@@ -46,7 +52,7 @@ const addTask = () => {
         image : '' ,
         point : '',
         memberCount : '',
-        members : {},
+        member : {},
     }
 }
 
@@ -93,12 +99,12 @@ const addTask = () => {
                 <label for="status" class="text-white">Member</label>
                 <div class="w-full flex rounded-md">
                     <template></template>
-                    <select id="status" @change="addMember($event)" class="w-1/3 text-gray-300 bg-[#121212] rounded-l-lg p-2">
+                    <select     @change="addMember($event)" class="w-1/3 text-gray-300 bg-[#121212] rounded-l-lg p-2">
                         <option v-for="user in dataStore.user" :value="user.id" :key="user.id" >{{user.name}}</option>
                     </select>
                     <div class="w-2/3 flex flex-wrap text-gray-300 bg-[#121212] rounded-r-lg justify-start items-center px-1">
-                        <span v-for="name in inputData.members" class="text-gray-300 flex justify-center items-center border border-gray-500 rounded-md p-1 m-1">{{name}} 
-                            <span class="text-md ml-1 material-symbols-outlined hover:text-red-900 cursor-pointer"  >
+                        <span v-for="member in members" class="text-gray-300 flex justify-center items-center border border-gray-500 rounded-md p-1 m-1">{{member.name}} 
+                            <span class="text-md ml-1 material-symbols-outlined hover:text-red-900 cursor-pointer" >
                                 cancel
                             </span>
                         </span>

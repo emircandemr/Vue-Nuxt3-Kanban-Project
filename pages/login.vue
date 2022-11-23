@@ -1,9 +1,12 @@
 <script setup>
+import { useDataStore } from '~~/stores/use-Data';
 
 definePageMeta({
     layout : 'entry',
 })
 const router = useRouter()
+const dataStore = useDataStore()
+
 
 const emailValid = computed(() => {
     const select = inputs.value.filter((item) => item.label == "Email")
@@ -36,6 +39,7 @@ const typeHandler = () => {
     password.type = password.type == "password" ? "text" : "password"
     password.icon = password.icon == "visibility" ? "visibility_off" : "visibility"
 }
+
 
 
 const inputs = ref([

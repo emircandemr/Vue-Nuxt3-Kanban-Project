@@ -5,48 +5,47 @@ export const useDataStore = defineStore("data", {
     state: () => {
         return {
             user : [
-                {id: "eej6g0hBVjhoKP9CrVaBO2mDXT93" , name: "John"},
-                {id: "zp16215zqHgjbepL2xZg5t0NZQf2", name: "Jane"},
+                {id: 1, name: "John"},
             ],
             data: [
-                {
-                    id: 1,
-                    title: "First Item",
-                    description: "This is the first item",
-                    category : "High",
-                    date: "2021-01-01",
-                    image : "https://picsum.photos/200/300",
-                    point : 1000,
-                    memberCount : 3,
-                    member : { 
-                    }
-                },
-                {
-                    id: 2,
-                    title: "Second Item",
-                    description: "This is the second item",
-                    category : "Medium",
-                    date: "2021-01-01",
-                    image : "https://picsum.photos/200/300",
-                    point : 100,
-                    memberCount : 3,
-                    member : { 
+                // {
+                //     id: 1,
+                //     title: "First Item",
+                //     description: "This is the first item",
+                //     category : "High",
+                //     date: "2021-01-01",
+                //     image : "https://picsum.photos/200/300",
+                //     point : 1000,
+                //     memberCount : 3,
+                //     member : { 
+                //     }
+                // },
+                // {
+                //     id: 2,
+                //     title: "Second Item",
+                //     description: "This is the second item",
+                //     category : "Medium",
+                //     date: "2021-01-01",
+                //     image : "https://picsum.photos/200/300",
+                //     point : 100,
+                //     memberCount : 3,
+                //     member : { 
                       
-                    }
-                },
-                {
-                    id: 3,
-                    title: "Third Item",
-                    description: "This is the Third item",
-                    category : "Low",
-                    date: "2021-01-01",
-                    image : "https://picsum.photos/200/300",
-                    point : 100,
-                    memberCount : 3,
-                    member : { 
+                //     }
+                // },
+                // {
+                //     id: 3,
+                //     title: "Third Item",
+                //     description: "This is the Third item",
+                //     category : "Low",
+                //     date: "2021-01-01",
+                //     image : "https://picsum.photos/200/300",
+                //     point : 100,
+                //     memberCount : 3,
+                //     member : { 
                         
-                    }
-                },
+                //     }
+                // },
                 
             ],
             selected:"",
@@ -73,8 +72,9 @@ export const useDataStore = defineStore("data", {
         setModalChange(){
             this.isModalActive = !this.isModalActive
         },
-        setUserToData(){
+        setUserToData(id){
             this.data = this.data.map(item => {
+                if(item.member[id]) return item
                 item.member = this.user.reduce((acc,cur) => {
                     acc[cur.id] = {
                         name : cur.name,
