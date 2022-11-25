@@ -126,6 +126,11 @@ const registerHandler = async () => {
     // // authStore.setUser(inputValues.value)
 }
 
+onMounted(() => {
+    const result = queryByCollection("users")
+    console.log(result)
+})
+
 </script>
 
 <template>
