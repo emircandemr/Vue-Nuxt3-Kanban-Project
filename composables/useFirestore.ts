@@ -11,6 +11,7 @@ import {
     collectionGroup,
     Timestamp,
     documentId,
+    updateDoc,
   } from "firebase/firestore";
 
   
@@ -26,6 +27,7 @@ import {
       return {
         ...doc.data(),
         id:new Date().getTime(),
+        taskID : doc.id,
       };
     });
   
@@ -48,6 +50,19 @@ import {
   
     return docRef;
   };
+
+  export const update = async (col: string, id: string, document: Object) => {
+    const {$db} = useNuxtApp();
+
+    // @ts-ignore
+    const docRef = doc($db, col, id);
+
+    await updateDoc(docRef, document);
+
+    return docRef;
+
+  };
+
   
   export const del = async (col : string, id : string) => {
     const {$db} = useNuxtApp();

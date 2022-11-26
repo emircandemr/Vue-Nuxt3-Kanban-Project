@@ -18,7 +18,8 @@ onMounted(async () => {
 })
 
 onUnmounted(async () => {
-    await add("task", dataStore.data)
+    await update("tasks", )
+       
 })
 
 const status = ['Backlog', 'Todo', 'Inprogress', 'Done']
