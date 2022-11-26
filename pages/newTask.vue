@@ -62,7 +62,8 @@ const addTask = () => {
     <div class="w-full h-full flex justify-center items-center">
         <div class="w-3/5 h-full bg-[#212121] rounded-2xl flex flex-col justify-center items-center">
             <h1 class="text-2xl text-center font-bold text-gray-200">New Task</h1>
-            {{inputData.members}}
+            {{inputData.member}}
+            {{dataStore.user}}
             <div class="w-2/3 text-white">
                 <label for="title" >Title</label>
                 <input v-model="inputData.title" type="text" id="title" placeholder="Title" class="w-full h-10 bg-[#121212] rounded-lg p-2">
@@ -99,7 +100,7 @@ const addTask = () => {
                 <label for="status" class="text-white">Member</label>
                 <div class="w-full flex rounded-md">
                     <template></template>
-                    <select     @change="addMember($event)" class="w-1/3 text-gray-300 bg-[#121212] rounded-l-lg p-2">
+                    <select @change="addMember($event)" class="w-1/3 text-gray-300 bg-[#121212] rounded-l-lg p-2">
                         <option v-for="user in dataStore.user" :value="user.id" :key="user.id" >{{user.name}}</option>
                     </select>
                     <div class="w-2/3 flex flex-wrap text-gray-300 bg-[#121212] rounded-r-lg justify-start items-center px-1">

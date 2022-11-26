@@ -10,7 +10,9 @@ import {
     setDoc,
     collectionGroup,
     Timestamp,
+    documentId,
   } from "firebase/firestore";
+
   
 
   export const queryByCollection = async (col: string) => {
@@ -23,7 +25,7 @@ import {
     const docs = Array.from(snapshot.docs).map((doc) => {
       return {
         ...doc.data(),
-        id: doc.id,
+        id:new Date().getTime(),
       };
     });
   
@@ -41,13 +43,13 @@ import {
 
     // @ts-ignore
     const colRef = collection($db, col);
-  
+
     const docRef = await addDoc(colRef, document);
   
     return docRef;
   };
   
-  export const del = async (col, id) => {
+  export const del = async (col : string, id : string) => {
     const {$db} = useNuxtApp();
 
     const docRef = doc($db, col, id);

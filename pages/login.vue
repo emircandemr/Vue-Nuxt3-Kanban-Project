@@ -69,6 +69,25 @@ const loginHandler = async () => {
     }
 }
 
+onMounted(async () => {
+    // const user = await getUser()
+    // if(user){
+    //     router.push({ path: "/" })
+    // }
+    const resultTasks = await queryByCollection("tasks")
+    resultTasks.map((item) => {
+        dataStore.addTask(item)
+    })
+
+    const resultUsers = await queryByCollection("users")
+    resultUsers.map((item) => {
+        dataStore.setUser(item)
+    })
+    console.log(dataStore.user)
+
+})
+
+
 </script>
 
 <template>

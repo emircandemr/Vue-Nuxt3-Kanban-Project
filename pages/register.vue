@@ -114,22 +114,25 @@ const registerHandler = async () => {
     const email = inputs.value.filter((item) => item.label == "Email")[0].value
     const password = inputs.value.filter((item) => item.label == "Password")[0].value
     await createUser(email , password)
-    dataStore.setUser(
+    // dataStore.setUser(
+    //     {
+    //         name : inputs.value.filter((item) => item.value)[0].value,
+    //         id : firebaseUser.value.uid,
+    //     }   
+    //     )
+    await add("users",
         {
-            name : inputs.value.filter((item) => item.value)[0].value,
-            id : firebaseUser.value.uid,
+            name : inputs.value.filter((item) => item.label=="Name")[0].value,
+            surname : inputs.value.filter((item) => item.label=="Surname")[0].value,
+            userID : firebaseUser.value.uid,
         }   
-        )
-    console.log(dataStore.user)
+    )
     router.push({ path: "/login" })
     // await loginUser(email, password)
     // // authStore.setUser(inputValues.value)
 }
 
-onMounted(() => {
-    const result = queryByCollection("users")
-    console.log(result)
-})
+
 
 </script>
 

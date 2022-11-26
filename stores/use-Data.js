@@ -5,7 +5,6 @@ export const useDataStore = defineStore("data", {
     state: () => {
         return {
             user : [
-                {id: 1, name: "John"},
             ],
             data: [
                 // {
@@ -17,7 +16,8 @@ export const useDataStore = defineStore("data", {
                 //     image : "https://picsum.photos/200/300",
                 //     point : 1000,
                 //     memberCount : 3,
-                //     member : { 
+                //     member : {
+                       
                 //     }
                 // },
                 // {
@@ -66,6 +66,7 @@ export const useDataStore = defineStore("data", {
         },
         DropData(event,statu,userID){
             const itemID = event.dataTransfer.getData("id");
+            console.log(itemID)
             const index = this.data.findIndex(item => item.id === parseInt(itemID))
             this.data[index].member[userID].statu = statu
         },
@@ -76,7 +77,8 @@ export const useDataStore = defineStore("data", {
             this.data = this.data.map(item => {
                 if(item.member[id]) return item
                 item.member = this.user.reduce((acc,cur) => {
-                    acc[cur.id] = {
+                    console.log(cur)
+                    acc[cur.userID] = {
                         name : cur.name,
                         statu : "Backlog"
                     }
