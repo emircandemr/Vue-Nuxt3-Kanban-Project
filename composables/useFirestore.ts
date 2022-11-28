@@ -26,13 +26,15 @@ import {
     const docs = Array.from(snapshot.docs).map((doc) => {
       return {
         ...doc.data(),
-        id:new Date().getTime(),
-        taskID : doc.id,
+        // id: new Date().getTime(),
+        taskID : doc.id
       };
     });
   
     return docs;
   };
+
+
   
   export const set = async (col: string, document: Object) => {
     const {$db} = useNuxtApp();
@@ -51,10 +53,9 @@ import {
     return docRef;
   };
 
-  export const update = async (col: string, id: string, document: Object) => {
+  export const update = async (col: string, id: string, document:any) => {
     const {$db} = useNuxtApp();
 
-    // @ts-ignore
     const docRef = doc($db, col, id);
 
     await updateDoc(docRef, document);
@@ -62,6 +63,8 @@ import {
     return docRef;
 
   };
+
+
 
   
   export const del = async (col : string, id : string) => {

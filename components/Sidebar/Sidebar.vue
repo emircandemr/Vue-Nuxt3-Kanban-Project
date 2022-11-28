@@ -1,5 +1,20 @@
 <script setup>
 
+import { useDataStore } from '~~/stores/use-Data';
+
+const firebaseUser = useFirebaseUser()
+const userID = firebaseUser.value?.uid
+
+const admin = ref(false)
+
+onMounted(async () => {
+    if(userID == "s4kGjqIq7PgBCzRvFIsSrXgSbsD3"){
+        admin.value = true
+    }
+
+})
+
+
 </script>
 
 <template>
@@ -28,7 +43,7 @@
                             </div>
                         </NuxtLink>
                     </li>
-                    <li class="my-5 py-3 px-5 rounded-lg hover:bg-[#5293ee] hover:text-black">
+                    <li v-if="admin"  class="my-5 py-3 px-5 rounded-lg hover:bg-[#5293ee] hover:text-black">
                         <NuxtLink  to="/newTask" class="flex" >
                             <div class="flex justify-center items-center">
                                 <span class="material-symbols-outlined">

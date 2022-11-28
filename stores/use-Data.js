@@ -4,50 +4,8 @@ import {defineStore} from 'pinia'
 export const useDataStore = defineStore("data", {
     state: () => {
         return {
-            user : [
-            ],
-            data: [
-                // {
-                //     id: 1,
-                //     title: "First Item",
-                //     description: "This is the first item",
-                //     category : "High",
-                //     date: "2021-01-01",
-                //     image : "https://picsum.photos/200/300",
-                //     point : 1000,
-                //     memberCount : 3,
-                //     member : {
-                       
-                //     }
-                // },
-                // {
-                //     id: 2,
-                //     title: "Second Item",
-                //     description: "This is the second item",
-                //     category : "Medium",
-                //     date: "2021-01-01",
-                //     image : "https://picsum.photos/200/300",
-                //     point : 100,
-                //     memberCount : 3,
-                //     member : { 
-                      
-                //     }
-                // },
-                // {
-                //     id: 3,
-                //     title: "Third Item",
-                //     description: "This is the Third item",
-                //     category : "Low",
-                //     date: "2021-01-01",
-                //     image : "https://picsum.photos/200/300",
-                //     point : 100,
-                //     memberCount : 3,
-                //     member : { 
-                        
-                //     }
-                // },
-                
-            ],
+            user : [],
+            data: [],
             selected:"",
             isModalActive : false,
         }
@@ -66,7 +24,7 @@ export const useDataStore = defineStore("data", {
         },
         DropData(event,statu,userID){
             const itemID = event.dataTransfer.getData("id");
-            console.log(itemID)
+            console.log("itemID",itemID)
             const index = this.data.findIndex(item => item.id === parseInt(itemID))
             this.data[index].member[userID].statu = statu
         },

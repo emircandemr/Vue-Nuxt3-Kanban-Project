@@ -1,9 +1,10 @@
 <script setup>
 import { useDataStore } from '~~/stores/use-Data';
 
-
 definePageMeta({
     layout : 'content',
+    middleware : ['admin']
+
 })
 
 const dataStore = useDataStore()
@@ -22,18 +23,15 @@ const inputData = ref({
 
 
 const addMember = (e) => {
+    console.log(e.target.value)
     dataStore.user.filter((item) => {
-        if(item.id == e.target.value){
+        if(item.userID == e.target.value){
             inputData.value.member[e.target.value] = {
                 name : item.name,
                 statu : "Todo"
             }
         }
     })
-    // inputData.value.members = {
-    //     ...inputData.value.members,
-    //     [e.target.value] : e.target.value
-    // }
 }
 
 const members = computed(() => {
@@ -42,8 +40,9 @@ const members = computed(() => {
     }
 })
 
-const addTask = () => {
+const addTask = async () => {
     dataStore.addTask(inputData.value)
+    await add("tasks", inputData.value)
     inputData.value = {
         title : '',
         description : '',
@@ -60,7 +59,7 @@ const addTask = () => {
 
 <template>
     <div class="w-full h-full flex justify-center items-center">
-        <div class="w-3/5 h-full bg-[#212121] rounded-2xl flex flex-col justify-center items-center">
+        <div class="w-3/5 h-full bg-[#212121] rounded-2xl flex flex-col justify-center items-center text-white">
             <h1 class="text-2xl text-center font-bold text-gray-200">New Task</h1>
             {{inputData.member}}
             {{dataStore.user}}
@@ -99,9 +98,8 @@ const addTask = () => {
             <div class="w-2/3 flex flex-col mt-2">
                 <label for="status" class="text-white">Member</label>
                 <div class="w-full flex rounded-md">
-                    <template></template>
                     <select @change="addMember($event)" class="w-1/3 text-gray-300 bg-[#121212] rounded-l-lg p-2">
-                        <option v-for="user in dataStore.user" :value="user.id" :key="user.id" >{{user.name}}</option>
+                        <option v-for="user in dataStore.user" :value="user.userID" :key="user.id" >{{user.name}}</option>
                     </select>
                     <div class="w-2/3 flex flex-wrap text-gray-300 bg-[#121212] rounded-r-lg justify-start items-center px-1">
                         <span v-for="member in members" class="text-gray-300 flex justify-center items-center border border-gray-500 rounded-md p-1 m-1">{{member.name}} 
@@ -115,12 +113,6 @@ const addTask = () => {
             <div class="w-2/3 mt-5">
                 <button @click="addTask" class="w-full h-10 bg-blue-500 text-white rounded-md">Submit</button>
             </div>
-        </div>
-        <div class="bg-red-500 w-96 ml-5 h-full text-white">
-            <code>
-                {{dataStore.data}}
-            </code>
-
         </div>
 
     </div>

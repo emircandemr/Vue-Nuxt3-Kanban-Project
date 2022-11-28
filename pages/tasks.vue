@@ -27,9 +27,6 @@ const status = ['Backlog', 'Todo', 'Inprogress', 'Done']
 </script>
 <template>
     <div class="w-full h-full flex flex-wrap justify-center items-center text-white">
-        <code>
-            {{dataStore.data}}
-        </code>
         <div v-for="statu in status" class="w-1/4 p-5 h-full flex flex-col items-center"
         @drop="dataStore.DropData($event, statu, userID)"
         @dragenter.prevent
@@ -38,7 +35,6 @@ const status = ['Backlog', 'Todo', 'Inprogress', 'Done']
                 <h1 class="text-xl font-bold" :class="statu" >{{statu}}</h1>
             </div> 
             <div class="w-[85%]  flex flex-col items-center">
-                {{userID}}
                 <TaskItem v-for="data in dataStore.getData(statu,userID)" :key="data.id" :item="data" :statu="statu" />
             </div>
         </div>

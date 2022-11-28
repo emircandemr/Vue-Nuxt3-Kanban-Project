@@ -5,6 +5,9 @@ const dataStore = useDataStore()
 
 const props = defineProps(["item","statu"])
 
+const firebaseUser = useFirebaseUser()
+const userID = firebaseUser.value?.uid
+
 const isDragActive = ref(false)
 
 const dragActiveHandler = () => {
@@ -14,6 +17,20 @@ const dragActiveHandler = () => {
 // const dragLeaveHandler = () => {
 //     isDragActive.value = false
 // }
+
+watchEffect(async () => {
+    console.log(props.item.member[userID])
+    await update("tasks", props.item.taskID, {
+        member : {
+            ...props.item.member,
+            [userID] : {
+                name : props.item.member[userID].name,
+                statu : props.item.member[userID].statu
+            }
+        }
+    })
+}, props.item.member[userID].statu  )
+
 
 const modalHandler = () => {
     dataStore.setModalChange()
@@ -28,7 +45,6 @@ const modalHandler = () => {
     @dragenter.prevent = "dragActiveHandler"
     @dragend.prevent = "dragActiveHandler"
     :class="{'active' : isDragActive}">
-
     <div class="w-full h-8 flex justify-between items-center ">
         <Badge 
         size="w-14"
