@@ -33,15 +33,15 @@ const selectFilter = computed(() => {
 <template>
     <div class="w-full h-full flex flex-col">
         <Header> </Header>
-        <div class= "w-full h-[80%] flex justify-between ">
-            <div class="w-[55%] min-h-[85%] mt-5 ml-7 px-5 flex flex-col text-white overflow-y-auto">
+        <div class= "w-full h-full lg:h-[80%] flex-col lg:flex lg:flex-row justify-between ">
+            <div class="w-[90%] lg:w-[55%] h-1/2 lg:min-h-[85%] mx-auto md:mt-5 md:ml-7 px-5 flex flex-col text-white overflow-y-auto">
                 <h1 class=" text-2xl">Tasks</h1>
                 <div class="w-full mt-3 text-start">
                     <SharedButton 
                     v-for="statu in status"
                     :handler = "() => filterHandler(statu)"
                     :text = "statu"
-                    class="px-3 mr-2 py-1 cursor-pointer hover:text-[#5293ee]"
+                    class="px-1 mr-2 py-1 cursor-pointer hover:text-[#5293ee]"
                     >
                     </SharedButton>
                 </div>

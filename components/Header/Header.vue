@@ -46,19 +46,15 @@ const taskData = [
 <style scoped>
 
 .header{
-    @apply w-full h-44 px-5 py-3 flex items-center justify-between 
-}
-
-.header__user{
-    @apply w-[30%] h-full ml-5 flex bg-[#212121] text-white shadow-2xl font-medium rounded-3xl 
+    @apply w-full md:h-44 px-5 py-3 md:flex md:items-center md:justify-between 
 }
 
 .header__right{
-    @apply w-[30%] h-full flex flex-col  rounded-3xl ml-10 
-}
+    @apply w-[90%] sm:w-[70%] md:w-[2/3] lg:w-[30%] md:h-full flex flex-col rounded-3xl mx-auto md:mx-0
+} 
 
 .header__avatar{
-    @apply w-[15%] h-full flex flex-col mr-5  rounded-3xl ml-10 justify-between
+    @apply w-[90%] sm:w-[70%] md:w-[33%] lg:w-[15%] md:h-full flex flex-col mx-auto md:mx-0 mt-10 md:mt-0  rounded-3xl justify-between
 }
 
 </style>
