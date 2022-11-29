@@ -55,11 +55,16 @@ export const useDataStore = defineStore("data", {
             const index = this.data.findIndex(item => item.id === id)
             this.data[index].isFavorite = !this.data[index].isFavorite
         },
+        clearData(){
+            this.data = []
+            this.user= []
+            this.selected = ""
+        },
+        getPoint(id) {
+            return this.data.filter(item => item.member[id]?.statu === "Done").reduce((a, b) => a + b.point, 0)
+        },
     },
     getters: {
-        getPoint() {
-            return this.data.filter(item => item.statu === "Done").reduce((a, b) => a + b.point, 0)
-        },
         getCompletedTask () {
             return this.data.filter(item => item.statu === "Done").length
         },

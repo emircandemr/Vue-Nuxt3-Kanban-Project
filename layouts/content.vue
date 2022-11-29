@@ -15,11 +15,11 @@
 <style scoped>
 
 .main {
-    @apply w-full h-full md:h-screen  bg-[#121212] flex items-center md:justify-center
+    @apply w-full h-fit min-h-screen lg:h-screen  bg-[#121212] flex items-center justify-center
 }
 
 .main__content{
-  @apply w-full md:w-[75%] h-[90%] flex flex-col items-center ml-12;
+  @apply w-full h-screen lg:w-[75%] lg:h-[90%] flex flex-col items-center;
 }
 
 </style>

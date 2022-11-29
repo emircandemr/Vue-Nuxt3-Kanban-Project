@@ -137,11 +137,10 @@ const registerHandler = async () => {
 </script>
 
 <template>
-    <div class="w-2/5 h-3/4 ml-10 p-5  flex flex-col justify-center items-center ">
-        {{formValid}}
+    <div class="w-full lg:w-2/5 h-3/4 lg:ml-10 p-5  flex flex-col justify-center items-center ">
         <div class="w-[70%] mb-5 ">
             <p class="text-gray-400 text-sm">START FOR FREE</p>
-            <h1 class="text-5xl mb-3 mt-3 text-white">Create new  <span class="text-5xl font-bold text-[#2772db]" >account</span> . </h1>
+            <h1 class="text-xl lg:text-5xl mb-3 mt-3 text-white">Create new  <span class="text-xl lg:text-5xl font-bold text-[#2772db]" >account</span> . </h1>
             <span class="text-sm mt-5 text-gray-400">Already A Member ? 
             <NuxtLink to="/login">
                 <span class="text-[#2772db] underline decoration-dotted ">Login</span>
@@ -166,13 +165,13 @@ const registerHandler = async () => {
                 size="text-2xl">
                 </SharedIcon>
             </div>
-            <span v-if="passwordValid !== true" class="text-red-800 px-2 mt-1 text-xs">{{passwordValid}}</span> 
+            <span v-if="passwordValid !== true" class="text-red-800 md:px-2 mt-1 text-xs">{{passwordValid}}</span> 
         </div>
         <div class="w-[70%] mt-10 flex justify-center items-center">
             <button @click=registerHandler
             :disabled= !formValid
             :class="{'bg-green-800 cursor-pointer hover:bg-green-700' : formValid, 'cursor-not-allowed bg-[#22559c]' : !formValid }"
-            class="w-1/2 px-3 py-3  text-white rounded-xl ">Create New Account</button>
+            class="w-full md:w-1/2 lg:w-[40%] px-3 py-3  text-white rounded-xl ">Create New Account</button>
         </div>
     </div>
 </template>

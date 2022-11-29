@@ -18,18 +18,18 @@ const dragActiveHandler = () => {
 //     isDragActive.value = false
 // }
 
-watchEffect(async () => {
-    console.log(props.item.member[userID])
-    await update("tasks", props.item.taskID, {
-        member : {
-            ...props.item.member,
-            [userID] : {
-                name : props.item.member[userID].name,
-                statu : props.item.member[userID].statu
-            }
-        }
-    })
-}, props.item.member[userID].statu  )
+// watchEffect(async () => {
+//     console.log(props.item.member[userID])
+//     await update("tasks", props.item.taskID, {
+//         member : {
+//             ...props.item.member,
+//             [userID] : {
+//                 name : props.item.member[userID].name,
+//                 statu : props.item.member[userID].statu
+//             }
+//         }
+//     })
+// }, props.item.member[userID].statu  )
 
 
 const modalHandler = () => {

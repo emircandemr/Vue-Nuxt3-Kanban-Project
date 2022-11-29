@@ -91,14 +91,15 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="w-2/5 h-3/4 ml-10 p-5 flex flex-col justify-center items-center ">
+    <div class="w-full lg:w-2/5 h-3/4 lg:ml-10 p-5 flex flex-col justify-center items-center ">
         <div class="w-[70%] mb-5 ">
             <p class="text-gray-400 text-sm">START FOR FREE</p>
-            <h1 class="text-5xl mb-3 mt-3 text-white">Welcome  <span class="text-5xl text-[#2772db]" >Back</span> . </h1>
-            <span class="text-sm mt-5 text-gray-400">Doesn't have an account yet ? 
+            <h1 class="text-2xl lg:text-5xl mb-3 mt-3 text-white">Welcome  <span class="text-2xl lg:text-5xl text-[#2772db]" >Back</span> . </h1>
+            <span class="text-xs lg:text-md mt-5 text-gray-400">Doesn't have an account yet ? 
             <NuxtLink to="/register">
                 <span class="text-md cursor-pointer text-[#2772db] underline decoration-dotted ">Sign Up</span>
-            </NuxtLink> </span>
+            </NuxtLink> 
+        </span>
         </div>
         <div class="w-[70%] ">
             <div 

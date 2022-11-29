@@ -2,6 +2,8 @@
 import {useDataStore} from '../../stores/use-Data'
 
 const dataStore = useDataStore()
+const firebaseUser = useFirebaseUser()
+const userID = firebaseUser.value?.uid
 
 const taskData = [
     {
@@ -36,7 +38,7 @@ const taskData = [
                     <SharedAvatar size="h-10 w-10" />
                 </div>
                 <div class="w-full h-32 flex items-center justify-around mt-4"   >
-                    <HeaderTask title="Your Total Point" :number="dataStore.getPoint"></HeaderTask>
+                    <HeaderTask title="Your Total Point" :number="dataStore.getPoint(userID)"></HeaderTask>
                 </div>
             </div>
     </div>

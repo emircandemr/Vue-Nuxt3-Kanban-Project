@@ -2,6 +2,8 @@
 
 import { useDataStore } from '~~/stores/use-Data';
 
+const dataStore = useDataStore()
+
 const firebaseUser = useFirebaseUser()
 const userID = firebaseUser.value?.uid
 
@@ -11,14 +13,18 @@ onMounted(async () => {
     if(userID == "s4kGjqIq7PgBCzRvFIsSrXgSbsD3"){
         admin.value = true
     }
-
 })
+
+const outHandler = async () => {
+    dataStore.clearData()
+    await signOut()
+}
 
 
 </script>
 
 <template>
-    <div class="h-screen fixed left-0 top-0 md:relative flex items-center justify-center">
+    <div class="h-screen  flex items-center justify-center">
         <div class="w-14 h-full md:w-28 md:h-[90%] bg-[#212121] shadow-2xl md:rounded-xl  ">
             <div class="w-full h-20 font-bold text-white mr-5 flex flex-col justify-center items-center md:mt-10 ">
                 <h1 class="text-3xl md:text-5xl text-[#5293ee]">P.</h1>
@@ -53,7 +59,7 @@ onMounted(async () => {
                         </NuxtLink>
                     </li>
                     <li class="my-5 py-3 px-5 rounded-lg hover:bg-[#5293ee] hover:text-black">
-                        <NuxtLink  to="/login" class="flex" @click="signOut" >
+                        <NuxtLink  to="/login" class="flex" @click="outHandler" >
                             <div class="flex justify-center items-center">
                                 <span class="material-symbols-outlined">
                                 logout
