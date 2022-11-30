@@ -2,7 +2,7 @@
 
 export default defineNuxtConfig({
     modules: ['@nuxtjs/tailwindcss', '@nuxtjs/color-mode' ],
-    buildModules: ['@pinia/nuxt'],
+    buildModules: ['@pinia/nuxt','@nuxtjs/moment'],
     tailwindcss: {
         cssPath : '~/assets/css/tailwind.css',
         configPath : 'tailwind.config.js',

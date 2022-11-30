@@ -9,6 +9,8 @@ definePageMeta({
 
 })
 
+const firebaseUser = useFirebaseUser()
+const userID = firebaseUser.value?.uid
 
 const status = ['All', 'Todo', 'Inprogress', 'Done']
 
@@ -29,12 +31,12 @@ const selectFilter = computed(() => {
 
 
 
+
 </script>
 
 <template>
     <div class="w-full h-full flex flex-col">
         <Header> </Header>
-       
         <div class= "w-full h-full lg:h-[80%] flex-col lg:flex lg:flex-row justify-between ">
             <div class="w-[90%] lg:w-[55%] max-h-96 lg:h-[85%] mx-auto md:mt-5 md:ml-7 px-5 flex flex-col text-white overflow-y-auto">
                 <h1 class=" text-2xl">Tasks</h1>

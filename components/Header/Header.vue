@@ -16,11 +16,17 @@ const taskData = [
     }
 ]
 
+onBeforeMount(() => {
+    const currentUser = dataStore.user.find((item) => item.userID === userID)
+    dataStore.setCurrentUser(currentUser)
+})
+
+
 </script>
 
 <template>
     <div class="header">
-            <HeaderWelcome title="Emir" ></HeaderWelcome>
+            <HeaderWelcome :title="dataStore.currentUser.name"  ></HeaderWelcome>
             <div class="header__right">
                 <div class="w-full h-8 rounded-xl bg-[#212121] text-white font-medium flex justify-center items-center px-2 py-1 " >
                     <SharedIcon icon="search" size="w-5" color="text-gray-500" />

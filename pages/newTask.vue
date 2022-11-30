@@ -23,12 +23,12 @@ const inputData = ref({
 
 
 const addMember = (e) => {
-    console.log(e.target.value)
     dataStore.user.filter((item) => {
         if(item.userID == e.target.value){
             inputData.value.member[e.target.value] = {
                 name : item.name,
-                statu : "Todo"
+                statu : "Todo",
+                id: e.target.value
             }
         }
     })
@@ -45,7 +45,6 @@ const addTask = async () => {
         return item !== ''
     })
     if(checkData){
-        console.log("girdi")
         dataStore.addTask(inputData.value)
         await add("tasks", inputData.value)
         inputData.value = {
@@ -60,6 +59,11 @@ const addTask = async () => {
         }
     }
 }
+
+const deleteMember = (member) => {
+    delete inputData.value.member[member.id]
+}
+
 
 
 </script>
@@ -98,7 +102,7 @@ const addTask = async () => {
             </div>
             <div class="w-[90%] lg:w-2/3 mt-2">
                 <label for="point" class="text-white">Member Count</label>
-                <input type="number"  v-model="inputData.memberCount" id="point" :onKeyUp="inputData.memberCount > 5 ? inputData.memberCount=5 : inputData.memberCount" placeholder="Point" class="w-full h-10 text-gray-300 bg-[#121212] rounded-lg p-2">
+                <input type="number"  v-model="inputData.memberCount" id="point" :onKeyUp="inputData.memberCount > 5 ?   inputData.memberCount = 5 : inputData.memberCount" placeholder="Point" class="w-full h-10 text-gray-300 bg-[#121212] rounded-lg p-2">
             </div>
             <div class="w-[90%] lg:w-2/3 flex flex-col mt-2">
                 <label for="status" class="text-white">Member</label>
@@ -108,7 +112,7 @@ const addTask = async () => {
                     </select>
                     <div class="w-[90%] lg:w-2/3 flex flex-wrap text-gray-300 bg-[#121212] rounded-r-lg justify-start items-center px-1">
                         <span v-for="member in members" class="text-gray-300 flex justify-center items-center border border-gray-500 rounded-md p-1 m-1">{{member.name}} 
-                            <span class="text-md ml-1 material-symbols-outlined hover:text-red-900 cursor-pointer" >
+                            <span @click="deleteMember(member)" class="text-md ml-1 material-symbols-outlined hover:text-red-900 cursor-pointer" >
                                 cancel
                             </span>
                         </span>
@@ -119,7 +123,6 @@ const addTask = async () => {
                 <button @click="addTask" class="w-full h-10 bg-blue-500 text-white rounded-md">Submit</button>
             </div>
         </div>
-
     </div>
 </template>
 

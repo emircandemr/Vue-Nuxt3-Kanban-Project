@@ -19,7 +19,6 @@ const dragActiveHandler = () => {
 // }
 
 // watchEffect(async () => {
-//     console.log(props.item.member[userID])
 //     await update("tasks", props.item.taskID, {
 //         member : {
 //             ...props.item.member,
@@ -28,9 +27,16 @@ const dragActiveHandler = () => {
 //                 statu : props.item.member[userID].statu
 //             }
 //         }
-//     })
-// }, props.item.member[userID].statu  )
 
+//     })
+//     await add("activity", {
+//         name : dataStore.currentUser.name,
+//         title : props.item.title,
+//         statu : props.statu,
+//         date : new Date().getTime()
+//     })
+    
+// }, props.item.member[userID].statu  )
 
 const modalHandler = () => {
     dataStore.setModalChange()
@@ -51,23 +57,22 @@ const modalHandler = () => {
         :text="props.item.category"
         :color="props.item.category"
         :background="props.item.category">
-        </Badge>
-        <Badge
-        size="w-12"
-        color="text-green-900"
-        background="bg-green-200">
-        <span>
-            +{{props.item.point}}
-        </span>
-        </Badge>
-        <Badge
-        size="w-20"
-        :text=props.item.date
-        color="text-slate-800"
-        background="bg-[#edf0f7]">
-        </Badge>
-    </div>
-
+    </Badge>
+    <Badge
+    size="w-12"
+    color="text-green-900"
+    background="bg-green-200">
+    <span>
+        +{{props.item.point}}
+    </span>
+</Badge>
+<Badge
+size="w-20"
+:text=props.item.date
+color="text-slate-800"
+background="bg-[#edf0f7]">
+</Badge>
+</div>
     <div class="w-full h-12 my-2 py-1 ">
         <h1 class="text-sm font-bold text-gray-200">
             {{props.item.title}}
@@ -99,7 +104,7 @@ const modalHandler = () => {
         size="text-sm mr-1"
         color="text-black">
         </SharedIcon>
-        <span>0/{{props.item.memberCount}}</span>
+        <span> {{dataStore.getMemberCount(props.item.taskID).length}}/{{props.item.memberCount}}</span>
         </Badge>
     </div>
     <TaskDone

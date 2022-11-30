@@ -45,13 +45,17 @@ const closeHandler = () => {
                     </h1>
                     <p class="text-sm text-slate-900">
                         {{dataStore.selected.description}}
+                       
                     </p>
                 </div>
                 <div class="w-full min-h-16 mt-2 p-2 flex justify-between items-center ">
                     <div class= "gap-2 flex items-center justify-center flex-wrap">
                         <SharedAvatar 
-                        v-for="i in dataStore.selected.memberCount"
-                        size="w-10">  
+                        v-for="data in dataStore.getMemberCount(dataStore.selected.taskID)" 
+                        size="w-10"
+                        info="true"
+                        :name="data.name"
+                        >  
                         </SharedAvatar>
                     </div>
                     <Badge
@@ -63,7 +67,7 @@ const closeHandler = () => {
                     size="text-sm mr-1"
                     color="text-black">
                     </SharedIcon>
-                    <span>0/{{dataStore.selected.memberCount}}</span>
+                    <span> {{dataStore.getMemberCount(dataStore.selected.taskID).length}}/{{dataStore.selected.memberCount}}</span>
                     </Badge>
                     
                 </div>

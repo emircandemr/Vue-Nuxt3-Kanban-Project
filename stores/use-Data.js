@@ -6,6 +6,7 @@ export const useDataStore = defineStore("data", {
         return {
             user : [],
             data: [],
+            currentUser : null,
             selected:"",
             isModalActive : false,
         }
@@ -13,6 +14,9 @@ export const useDataStore = defineStore("data", {
     actions: {
         setSelectedData(data) {
             this.selected = data
+        },
+        setCurrentUser(user){
+            this.currentUser = user
         },
         getData(statu,id){
             return this.data.filter(item => item.member[id]?.statu === statu)
@@ -63,6 +67,19 @@ export const useDataStore = defineStore("data", {
         getPoint(id) {
             return this.data.filter(item => item.member[id]?.statu === "Done").reduce((a, b) => a + b.point, 0)
         },
+        getMemberCount (id){
+            // let count = 0
+            const countMember = this.data.find(item => item.taskID === id).member
+            // Object.keys(countMember).map(item => {
+            //     if(countMember[item].statu !== "Backlog"){
+            //         count++
+                    
+            //     }
+            // })
+            const memberValues = Object.values(countMember)
+            const member = memberValues.filter(item => item.statu !== "Backlog")
+            return member
+        }
     },
     getters: {
         getCompletedTask () {

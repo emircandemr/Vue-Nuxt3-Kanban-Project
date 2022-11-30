@@ -83,6 +83,7 @@ onMounted(async () => {
     resultUsers.map((item) => {
         dataStore.setUser(item)
     })
+
     console.log(dataStore.user)
 
 })
@@ -120,7 +121,7 @@ onMounted(async () => {
                 </SharedIcon>
             </div>
         </div>
-        <div class="w-[70%] mt-10 flex justify-center items-center">
+        <div class="w-[70%] mt-10 flex justify-center items-center rounded-xl">
            <SharedButton text="Login" :handler="loginHandler" ></SharedButton>
             <!-- <button @click="loginHandler" class="w-1/2 px-3 py-3 bg-[#22559c] text-white rounded-xl">Login</button> -->
         </div>
