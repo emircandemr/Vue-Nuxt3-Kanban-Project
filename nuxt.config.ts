@@ -10,9 +10,6 @@ export default defineNuxtConfig({
         injectPosition : 0 ,
         viewer : true ,
     },
-    colorMode: {
-        classSuffix: '',
-    },
     meta : {
         link : [
             {

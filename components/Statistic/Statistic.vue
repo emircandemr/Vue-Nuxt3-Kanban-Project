@@ -1,10 +1,62 @@
 <script setup>
+import { useDataStore } from '../../stores/use-Data'
+
+const dataStore = useDataStore()
+
+const firebaseUser = useFirebaseUser()
+
+const userID = firebaseUser.value?.uid
+
+const tabData = ref([
+  {
+    name : "Line",
+    isActive : true,
+    id : 1
+  },
+  {
+    name : "Doughnut",
+    isActive : false,
+    id : 2
+  },
+  {
+    name : "PolarArea",
+    isActive : false,
+    id : 3
+  },
+  {
+    name : "Bar",
+    isActive : false,
+    id : 4
+  }
+])
+
+const tabHandler = (id) => {
+  tabData.value.forEach((item) => {
+    if(item.id == id) return item.isActive = true
+    item.isActive = false
+  })
+}
+
+
 
 </script>
 
 <template>
-    <div class="w-[90%] h-80 mx-auto lg:w-[40%] lg:h-96 mt-5 bg-[#212121] rounded-xl flex justify-center ">
-        <h1 class="text-white mt-2">Statistic</h1>
+    <div class="w-[90%] lg:w-[50%] h-96 lg:h-[70%] mx-auto md:mt-5 md:ml-7 md:mr-5 rounded-2xl px-5 flex flex-col bg-[#121212] items-center text-white">
+            <h1 class=" text-2xl text-start">Statistic</h1>
+            <div class="w-full mt-3 mb-3 text-start">
+              <SharedButton 
+              v-for="data in tabData"
+              :text = "data.name"
+              class="px-1 mr-2 py-1 cursor-pointer hover:text-[#5293ee]"
+              :handler = "() => tabHandler(data.id)">
+              </SharedButton>
+            </div>
+            <StatisticDoughnut v-if="tabData[1].isActive" />
+            <StatisticLine v-if="tabData[0].isActive" />
+            <StatisticRadar v-if="tabData[2].isActive" />
+            <StatisticBar v-if="tabData[3].isActive" />
+
     </div>
 </template>
 

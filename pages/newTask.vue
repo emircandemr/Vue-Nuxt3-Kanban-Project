@@ -50,7 +50,7 @@ const addTask = async () => {
         inputData.value = {
             title : '',
             description : '',
-            statu : 'High',
+            category : 'High',
             date : '',
             image : '' ,
             point : '',

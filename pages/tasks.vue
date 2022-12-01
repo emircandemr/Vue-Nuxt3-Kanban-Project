@@ -49,7 +49,6 @@ const status = ['Backlog', 'Todo', 'Inprogress', 'Done']
 
 
 <style scoped>
-/* 323644 */
 .Todo{
     color:  #f06868;
 }

@@ -53,7 +53,7 @@ const closeHandler = () => {
                         <SharedAvatar 
                         v-for="data in dataStore.getMemberCount(dataStore.selected.taskID)" 
                         size="w-10"
-                        info="true"
+                        info=true
                         :name="data.name"
                         >  
                         </SharedAvatar>

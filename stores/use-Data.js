@@ -68,25 +68,19 @@ export const useDataStore = defineStore("data", {
             return this.data.filter(item => item.member[id]?.statu === "Done").reduce((a, b) => a + b.point, 0)
         },
         getMemberCount (id){
-            // let count = 0
             const countMember = this.data.find(item => item.taskID === id).member
-            // Object.keys(countMember).map(item => {
-            //     if(countMember[item].statu !== "Backlog"){
-            //         count++
-                    
-            //     }
-            // })
             const memberValues = Object.values(countMember)
             const member = memberValues.filter(item => item.statu !== "Backlog")
             return member
-        }
+        },
+        getCompletedTask (id) {
+            return this.data.filter(item => item.member[id]?.statu === "Done").length
+        },
+        getNotCompletedTask (id) {
+            return this.data.filter(item => item.member[id]?.statu !== "Done").length
+        },
+        getTaskByStatus(id,name) {
+            return this.data.filter(item => item.member[id]?.statu === name).length
+        },
     },
-    getters: {
-        getCompletedTask () {
-            return this.data.filter(item => item.statu === "Done").length
-        },
-        getNotCompletedTask () {
-            return this.data.filter(item => item.statu !== "Done").length
-        },
-    }
 })

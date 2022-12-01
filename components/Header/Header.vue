@@ -8,11 +8,11 @@ const userID = firebaseUser.value?.uid
 const taskData = [
     {
         text : "Task Completed",
-        number : dataStore.getCompletedTask
+        number : dataStore.getCompletedTask(userID)
     },
     {
         text : "Task Not Completed",
-        number : dataStore.getNotCompletedTask
+        number : dataStore.getNotCompletedTask(userID)
     }
 ]
 
