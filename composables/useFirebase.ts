@@ -16,6 +16,16 @@ export const createUser = async (email: string, password: string) => {
 export const loginUser = async (email: string, password: string) => {
     const auth = getAuth()
     const userCredential = await signInWithEmailAndPassword(auth, email, password)
+    .then(
+        (userCredential) => {
+            return userCredential
+        },
+    )
+    .catch((error) => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        console.log(errorCode, errorMessage)
+    })  
     return userCredential
 }
 

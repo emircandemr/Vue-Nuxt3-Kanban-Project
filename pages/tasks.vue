@@ -10,7 +10,6 @@ const dataStore = useDataStore()
 const firebaseUser = useFirebaseUser()
 const userID = firebaseUser.value?.uid
 
-// const userID = "eej6g0hBVjhoKP9CrVaBO2mDXT93"
 
 onMounted(async () => {
     dataStore.setUserToData(userID)
@@ -24,8 +23,6 @@ onMounted(async () => {
 //         date : new Date().getTime()
 //     })
 // })
-
-
 
 const status = ['Backlog', 'Todo', 'Inprogress', 'Done']
 

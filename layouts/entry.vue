@@ -1,4 +1,7 @@
 <script setup>
+import {useDataStore} from '../stores/use-Data'
+
+const dataStore = useDataStore()
 
 </script>
 
@@ -7,6 +10,8 @@
             <div class="w-full h-full bg-black bg-opacity-50 flex items-center">
                     <slot></slot>
             </div>
+        <NotificationList :notifications="dataStore.notifications" ></NotificationList>
+
         </div>
 </template>
 

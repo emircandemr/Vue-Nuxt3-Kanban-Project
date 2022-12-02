@@ -41,6 +41,7 @@ const members = computed(() => {
 })
 
 const addTask = async () => {
+    const {$toast} = useNuxtApp();
     const checkData = Object.values(inputData.value).every((item) => {
         return item !== ''
     })
@@ -57,6 +58,11 @@ const addTask = async () => {
             memberCount : '',
             member : {},
         }
+        dataStore.setNotifications($toast().success("Task successfully added",{
+            icon : "😎👌",
+            background : "#22559c",
+            barBackground : "#7CB9E8",
+        }))
     }
 }
 

@@ -9,9 +9,16 @@ export const useDataStore = defineStore("data", {
             currentUser : null,
             selected:"",
             isModalActive : false,
+            notifications : []
         }
     },
     actions: {
+        setNotifications(notifications){
+            this.notifications.push(notifications)
+        },
+        removeNotifications(id){
+            this.notifications = this.notifications.filter(notification => notification.id !== id)
+        },
         setSelectedData(data) {
             this.selected = data
         },
@@ -37,15 +44,15 @@ export const useDataStore = defineStore("data", {
         },
         setUserToData(id){
             this.data = this.data.map(item => {
-                if(item.member[id]) return item
                 item.member = this.user.reduce((acc,cur) => {
-                    console.log(cur)
+                    if(!item.member[cur.userID]){
                     acc[cur.userID] = {
                         name : cur.name,
                         statu : "Backlog"
-                    }
+                    }}
                     return acc
-                },{})
+                },{...item.member}
+                )
                 return item
             })
         },

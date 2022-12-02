@@ -7,30 +7,7 @@ const router = useRouter()
 definePageMeta({
     layout : 'entry',
 })
-
 const firebaseUser = useFirebaseUser()
-
-// const register = async () => {
-//     try {
-//         const user = await firebase.auth().createUserWithEmailAndPassword(inputValues.value.email,inputValues.value.password)
-//         await user.user.updateProfile({
-//             displayName : inputValues.value.name + " " + inputValues.value.surname
-//         })
-//         await firebase.firestore().collection("users").doc(user.user.uid).set({
-//             name : inputValues.value.name,
-//             surname : inputValues.value.surname,
-//             email : inputValues.value.email,
-//             password : inputValues.value.password,
-//             uid : user.user.uid,
-//             photoURL : user.user.photoURL,
-//             tasks : []
-//         })
-//         await firebase.auth().signOut()
-//         router.push("/login")
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
 
 const nameValid = computed(() => {
     const select = inputs.value.filter((item) => item.label == "Name")
@@ -111,15 +88,10 @@ const inputs = ref([
 ]) 
 
 const registerHandler = async () => {
+    const {$toast} = useNuxtApp();
     const email = inputs.value.filter((item) => item.label == "Email")[0].value
     const password = inputs.value.filter((item) => item.label == "Password")[0].value
     await createUser(email , password)
-    // dataStore.setUser(
-    //     {
-    //         name : inputs.value.filter((item) => item.value)[0].value,
-    //         id : firebaseUser.value.uid,
-    //     }   
-    //     )
     await add("users",
         {
             name : inputs.value.filter((item) => item.label=="Name")[0].value,
@@ -127,9 +99,9 @@ const registerHandler = async () => {
             userID : firebaseUser.value.uid,
         }   
     )
+    dataStore.setNotifications($toast().success("You have successfully registered"))
     router.push({ path: "/login" })
-    // await loginUser(email, password)
-    // // authStore.setUser(inputValues.value)
+  
 }
 
 
@@ -173,7 +145,7 @@ const registerHandler = async () => {
             :class="{'bg-green-800 cursor-pointer hover:bg-green-700' : formValid, 'cursor-not-allowed bg-[#22559c]' : !formValid }"
             class="w-full md:w-1/2 lg:w-[40%] px-3 py-3  text-white rounded-xl ">Create New Account</button>
         </div>
-    </div>
+    </div>                                                            
 </template>
 
 <style scoped>

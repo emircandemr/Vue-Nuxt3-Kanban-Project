@@ -78,7 +78,9 @@ background="bg-[#edf0f7]">
             {{props.item.title}}
         </h1>
         <p class="text-xs truncate text-gray-300">
-            {{props.item.description}}
+            <!-- {{props.item.description}} -->
+            {{props.item}}
+            {{dataStore.getMemberCount(props.item.taskID)}}
         </p>
     </div>
     <div class="w-full h-8 flex justify-between items-center">

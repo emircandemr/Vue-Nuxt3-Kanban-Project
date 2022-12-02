@@ -10,7 +10,8 @@ const userID = firebaseUser.value?.uid
 const admin = ref(false)
 
 onMounted(async () => {
-    if(userID == "s4kGjqIq7PgBCzRvFIsSrXgSbsD3"){
+    const config = useRuntimeConfig()
+    if(userID == config.ADMIN_UUID){
         admin.value = true
     }
 })

@@ -40,8 +40,6 @@ const typeHandler = () => {
     password.icon = password.icon == "visibility" ? "visibility_off" : "visibility"
 }
 
-
-
 const inputs = ref([
 {
     label : "Email",
@@ -61,11 +59,33 @@ const inputs = ref([
 ]) 
 
 const loginHandler = async () => {
+    const {$toast} = useNuxtApp();
     const email = inputs.value.filter((item) => item.label == "Email")[0].value
     const password = inputs.value.filter((item) => item.label == "Password")[0].value
     const credentials = await loginUser(email, password)
     if(credentials){
+        const resultTasks = await queryByCollection("tasks")
+        resultTasks.map((item) => {
+            dataStore.addTask(item)
+        })
+        
+        const resultUsers = await queryByCollection("users")
+        resultUsers.map((item) => {
+            dataStore.setUser(item)
+        })
         router.push({ path: "/" })
+        dataStore.setNotifications($toast().success("Login successful",{
+            icon : "😎👌",
+            background : "#22559c",
+            barBackground : "#7CB9E8",
+        }))
+    }
+    else{
+        dataStore.setNotifications($toast().error("Email or password is invalid",{
+            icon : "😭😭😭",
+            duration : 4000,
+            position : "top-left"
+        }))
     }
 }
 
@@ -74,15 +94,6 @@ onMounted(async () => {
     // if(user){
     //     router.push({ path: "/" })
     // }
-    const resultTasks = await queryByCollection("tasks")
-    resultTasks.map((item) => {
-        dataStore.addTask(item)
-    })
-
-    const resultUsers = await queryByCollection("users")
-    resultUsers.map((item) => {
-        dataStore.setUser(item)
-    })
 
     console.log(dataStore.user)
 

@@ -1,8 +1,9 @@
 export default defineNuxtPlugin( () => {
     addRouteMiddleware('admin', ()=> {
         const {$auth} = useNuxtApp();
+        const config = useRuntimeConfig()
 
-        if ($auth?.currentUser.uid !== "s4kGjqIq7PgBCzRvFIsSrXgSbsD3") {
+        if ($auth?.currentUser.uid !== config.ADMIN_UUID) {
             return navigateTo('/login')
         }
 
