@@ -76,7 +76,7 @@ const filteredHandler = () => {
 <style scoped>
 
 .header{
-    @apply w-full md:h-44 px-5 py-3 md:flex md:items-center md:justify-between 
+    @apply w-full md:h-44 px-5 md:flex md:items-center md:justify-between 
 }
 
 .header__right{

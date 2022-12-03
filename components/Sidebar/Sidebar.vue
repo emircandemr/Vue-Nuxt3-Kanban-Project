@@ -63,7 +63,7 @@ const sidebarItems = ref([
 </script>
 
 <template>
-    <div class="h-screen  flex items-center justify-center">
+    <div class="h-screen flex items-center justify-center">
         <div class="w-14 h-full md:w-28 md:h-[90%] bg-[#212121] shadow-2xl md:rounded-xl  ">
             <div class="w-full h-20 font-bold text-white mr-5 flex flex-col justify-center items-center md:mt-10 ">
                 <h1 class="text-3xl md:text-5xl text-[#5293ee]">P.</h1>

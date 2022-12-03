@@ -42,7 +42,7 @@ const tabHandler = (id) => {
 </script>
 
 <template>
-    <div class="w-[90%] lg:w-[50%] h-96 lg:h-[70%] mx-auto md:mt-5 md:ml-7 md:mr-5 rounded-2xl px-5 flex flex-col bg-[#121212] items-center text-white">
+    <div class="w-[90%] lg:w-[50%] hidden lg:flex rounded-2xl px-5  flex-col bg-[#121212] items-center text-white">
             <h1 class=" text-2xl text-start">Statistic</h1>
             <div class="w-full mt-3 mb-3 text-start">
               <SharedButton 

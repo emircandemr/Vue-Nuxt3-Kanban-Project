@@ -76,31 +76,31 @@ const deleteMember = (member) => {
 
 <template>
     <div class="w-full h-full flex justify-center items-center">
-        <div class="w-[95%] lg:w-3/5 h-full p-3 bg-[#212121] rounded-2xl flex flex-col justify-center items-center text-white">
+        <div class="w-[95%] lg:w-3/5 min-h-[90%] max-h-full p-3 overflow-y-auto fixed bg-[#212121] rounded-2xl flex flex-col justify-center items-center text-white">
             <h1 class="text-2xl text-center font-bold text-gray-200">New Task</h1>
             <div class="w-[90%] lg:w-2/3 text-white">
                 <label for="title" >Title</label>
-                <input v-model="inputData.title" type="text" id="title" placeholder="Title" class="w-full h-10 bg-[#121212] rounded-lg p-2">
+                <input v-model="inputData.title" type="text" id="title" placeholder="Title" class="w-full  bg-[#121212] rounded-lg p-2">
             </div>
-            <div class="w-[90%] lg:w-2/3 mt-1 text-white">
+            <div class="w-[90%] lg:w-2/3  text-white">
                 <label for="description">Description</label>
                 <textarea id="description" v-model="inputData.description" placeholder="Description" class="w-full h-32 bg-[#121212] rounded-lg p-2"></textarea>
             </div>
             <div class="w-[90%] lg:w-2/3">
                 <label for="image" class="text-white">Image</label>
-                <input type="file"  id="image" class="w-full h-10 bg-[#121212] rounded-lg py-1 px-1">
+                <input type="file"  id="image" class="w-full  bg-[#121212] rounded-lg py-1 px-1">
             </div>
             <div class="w-[90%] lg:w-2/3 mt-2">
                 <label for="date" class="text-white"> Submit Date</label>
-                <input type="date" id="date" v-model="inputData.date" class="date w-full h-10 text-gray-300 bg-[#121212] rounded-lg p-2">
+                <input type="date" id="date" v-model="inputData.date" class="date w-full  text-gray-300 bg-[#121212] rounded-lg p-2">
             </div>
             <div class="w-[90%] lg:w-2/3 mt-2">
                 <label for="point" class="text-white">Point</label>
-                <input type="number" id="point" v-model="inputData.point" placeholder="Point" class="w-full h-10 text-gray-300 bg-[#121212] rounded-lg p-2">
+                <input type="number" id="point" v-model="inputData.point" placeholder="Point" class="w-full  text-gray-300 bg-[#121212] rounded-lg p-2">
             </div>
             <div class="w-[90%] lg:w-2/3 mt-2">
                 <label for="category" class="text-white">Status</label>
-                <select id="category" v-model="inputData.category" class="w-full h-10 text-gray-300 bg-[#121212] rounded-lg p-2">
+                <select id="category" v-model="inputData.category" class="w-full  text-gray-300 bg-[#121212] rounded-lg p-2">
                     <option value="High">High</option>
                     <option value="Medium">Medium</option>
                     <option value="Low">Low</option>

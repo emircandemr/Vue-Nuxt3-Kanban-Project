@@ -11,19 +11,19 @@ const clickHandler = () => {
 </script>
 
 <template>
-    <div class="my-5 py-3 px-5 rounded-lg hover:bg-[#5293ee] hover:text-white"
-    :class="{ 'bg-[#5293ee]' : props.sidebarItem.isActive }">
-        <NuxtLink 
-        :to="props.sidebarItem.link" 
-        class="flex items-center justify-center"
-        @click="clickHandler">
+    <NuxtLink 
+    :to="props.sidebarItem.link" 
+    class="flex items-center justify-center"
+    @click="clickHandler">
+        <div class="my-5 py-3 px-5 rounded-lg hover:bg-[#5293ee] hover:text-white"
+        :class="{ 'bg-[#5293ee]' : props.sidebarItem.isActive }">
             <div class="flex justify-center items-center">
                 <span class="material-symbols-outlined">
                     {{props.sidebarItem.icon}}
                 </span>
             </div>
-        </NuxtLink>
-    </div>
+        </div>
+    </NuxtLink>
 </template>
 
 

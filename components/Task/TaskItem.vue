@@ -18,25 +18,63 @@ const dragActiveHandler = () => {
 //     isDragActive.value = false
 // }
 
-// watchEffect(async () => {
-//     await update("tasks", props.item.taskID, {
-//         member : {
-//             ...props.item.member,
-//             [userID] : {
-//                 name : props.item.member[userID].name,
-//                 statu : props.item.member[userID].statu
-//             }
-//         }
 
-//     })
-//     await add("activity", {
-//         name : dataStore.currentUser.name,
-//         title : props.item.title,
-//         statu : props.statu,
-//         date : new Date().getTime()
-//     })
+// watch(dataStore.data, async () => {
+//     // await update("tasks", props.item.taskID, {
+//     //     member : {
+//     //         ...props.item.member,
+//     //         [userID] : {
+//     //             name : props.item.member[userID].name,
+//     //             statu : props.item.member[userID].statu
+//     //         }
+//     //     }
+
+//     // })
+
+//     dataStore.setActivity(
+//         {
+//             name : dataStore.currentUser.name,
+//             title : props.item.title,
+//             statu : props.statu,
+//             date : new Date().getTime()
+//         }
+//     )
+// })
+
+// watchEffect(async () => {
+//     // await update("tasks", props.item.taskID, {
+//     //     member : {
+//     //         ...props.item.member,
+//     //         [userID] : {
+//     //             name : props.item.member[userID].name,
+//     //             statu : props.item.member[userID].statu
+//     //         }
+//     //     }
+
+//     // })
+
+//     dataStore.setActivity(
+//         {
+//             name : dataStore.currentUser.name,
+//             title : props.item.title,
+//             statu : props.statu,
+//             date : new Date().getTime()
+//         }
+//     )
+
+// })
+
+const activityHandler = () => {
     
-// }, props.item.member[userID].statu  )
+    dataStore.setActivity(
+        {
+            name : dataStore.currentUser.name,
+            title : props.item.title,
+            statu : props.statu,
+            date : new Date().getTime()
+        }
+    )
+}
 
 const modalHandler = () => {
     dataStore.setModalChange()
@@ -49,17 +87,17 @@ const modalHandler = () => {
     draggable="true"
     @dragstart="dataStore.StartDragData($event,props.item)"
     @dragenter.prevent = "dragActiveHandler"
-    @dragend.prevent = "dragActiveHandler"
+    @dragend.prevent = "activityHandler"
     :class="{'active' : isDragActive}">
     <div class="w-full h-8 flex justify-between items-center ">
         <Badge 
-        size="w-14"
+        size="w-12"
         :text="props.item.category"
         :color="props.item.category"
         :background="props.item.category">
     </Badge>
     <Badge
-    size="w-12"
+    size="xl:w-10 2xl:w-12"
     color="text-green-900"
     background="bg-green-200">
     <span>
@@ -67,7 +105,7 @@ const modalHandler = () => {
     </span>
 </Badge>
 <Badge
-size="w-20"
+size="xl:w-18 2xl:w-20"
 :text=props.item.date
 color="text-slate-800"
 background="bg-[#edf0f7]">

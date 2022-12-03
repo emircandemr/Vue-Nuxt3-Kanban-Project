@@ -9,10 +9,14 @@ export const useDataStore = defineStore("data", {
             currentUser : null,
             selected:"",
             isModalActive : false,
-            notifications : []
+            notifications : [],
+            activity : [],
         }
     },
     actions: {
+        setActivity(activity){
+            this.activity.unshift(activity)
+        },
         setNotifications(notifications){
             this.notifications.push(notifications)
         },
@@ -34,6 +38,7 @@ export const useDataStore = defineStore("data", {
             event.dataTransfer.setData("id", item.id);
         },
         DropData(event,statu,userID){
+            console.log(event.target,statu,userID)
             const itemID = event.dataTransfer.getData("id");
             console.log("itemID",itemID)
             const index = this.data.findIndex(item => item.id === parseInt(itemID))

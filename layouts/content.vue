@@ -21,11 +21,11 @@ const dataStore = useDataStore()
 <style scoped>
 
 .main {
-    @apply w-full h-fit min-h-screen lg:h-screen  bg-[#121212] flex items-center justify-center
+    @apply w-full lg:h-screen  bg-[#121212] flex items-center justify-center
 }
 
 .main__content{
-  @apply w-full h-screen lg:w-[75%] lg:h-[90%] flex flex-col items-center;
+  @apply w-full h-full md:h-[90%] lg:w-[75%] lg:h-[90%] flex flex-col items-center;
 }
 
 </style>

@@ -27,9 +27,9 @@ const modalHandler = () => {
 <template>
     <div class="w-full flex justify-between items-center">
         <img class="w-14 h-14 rounded-md ml-2" src="../../assets/img/task.png" alt="">
-        <div class="w-1/3 lg:w-[50%]  h-14 ml-3 flex flex-col justify-center">
+        <div class="w-20 sm:w-1/2 lg:w-1/3 xl:w-[45%] h-14 ml-3 flex flex-col justify-center">
             <h2 class="text-sm truncate">{{task.title}}</h2>
-            <p class="hidden md:block text-sm truncate">{{task.description}}</p>
+            <p class="hidden sm:block text-sm truncate">{{task.description}}</p>
         </div>
         <div v-for="data in cardData" class="w-[10%] h-14 hidden md:flex flex-col items-center justify-center">
             <SharedIcon
@@ -41,12 +41,13 @@ const modalHandler = () => {
             {{data.text}}
             </span>
         </div>
-        <SharedButton
-        text="Inspect"
-        :handler="modalHandler"
-        class="w-20 py-2 px-1 mx-5 rounded-md text-xs bg-[#22559c] text-white hover:bg-[#121212] hover:text-white">
-        </SharedButton>
-         
+        <div class="w-50 h-14 flex justify-center items-center">
+            <SharedButton
+            text="Inspect"
+            :handler="modalHandler"
+            class="w-20 py-2 px-1 mx-5 rounded-md text-xs bg-[#22559c] text-white hover:bg-[#121212] hover:text-white">
+            </SharedButton>
+        </div>
     </div>
 
 </template>

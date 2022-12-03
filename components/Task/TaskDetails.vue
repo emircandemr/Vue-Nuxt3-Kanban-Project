@@ -13,10 +13,10 @@ const closeHandler = () => {
     <div class="modal">
         <div class="modal__layer"></div>
         <div class="modal__content relative">
-            <div class="w-1/2 h-full rounded-xl">
+            <div class="w-1/2 hidden md:block h-full rounded-xl">
                 <img class="w-full h-full rounded-xl" src="../../assets/img/task.png" alt="">
             </div>
-            <div class="w-1/2 h-full px-5 border-l border-dashed border-gray-300">
+            <div class="w-full md:w-1/2 h-full px-5 md:border-l md:border-dashed border-gray-300">
                 <div class="w-full h-12 p-2 flex justify-between items-center mt-8">
                     <Badge 
                     size="w-14"
@@ -47,7 +47,7 @@ const closeHandler = () => {
                         {{dataStore.selected.description}}
                     </p>
                 </div>
-                <div class="w-full min-h-16 mt-2 p-2 flex justify-between items-center ">
+                <div class="w-full min-h-16 mt-2 p-2 mb-3 flex justify-between items-center ">
                     <div class= "gap-2 flex items-center justify-center flex-wrap">
                         <SharedAvatar 
                         v-for="data in dataStore.getMemberCount(dataStore.selected.taskID)" 
@@ -95,7 +95,7 @@ const closeHandler = () => {
 }
 
 .modal__content{
-    @apply w-2/5  h-2/5 absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]  bg-white rounded-xl shadow-xl flex justify-center items-center;
+    @apply w-[90%] h-2/5 md:h-[45%] lg:w-3/5 xl:w-2/5 lg:h-2/5 absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]  bg-white rounded-xl shadow-xl flex justify-center items-center;
 }
 
 </style>
