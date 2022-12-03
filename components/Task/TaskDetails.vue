@@ -44,8 +44,7 @@ const closeHandler = () => {
                         {{dataStore.selected.title}}
                     </h1>
                     <p class="text-sm text-slate-900">
-                        <!-- {{dataStore.selected.description}} -->
-                       {{dataStore.selected.member}}
+                        {{dataStore.selected.description}}
                     </p>
                 </div>
                 <div class="w-full min-h-16 mt-2 p-2 flex justify-between items-center ">

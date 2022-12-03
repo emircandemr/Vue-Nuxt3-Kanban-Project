@@ -7,20 +7,58 @@ const dataStore = useDataStore()
 const firebaseUser = useFirebaseUser()
 const userID = firebaseUser.value?.uid
 
-const admin = ref(false)
-
-onMounted(async () => {
-    const config = useRuntimeConfig()
-    if(userID == config.ADMIN_UUID){
-        admin.value = true
-    }
-})
 
 const outHandler = async () => {
     dataStore.clearData()
     await signOut()
 }
 
+const isAdmin = () => {
+    const {$toast} = useNuxtApp();
+    const config = useRuntimeConfig()
+    if(userID == config.ADMIN_UUID) return true
+    dataStore.setNotifications($toast().warning("Please Login as Admin"))
+}
+
+const isItemActive = (id) => {
+    sidebarItems.value.forEach((item) => {
+        if(item.id == id) return item.isActive = true
+        item.isActive = false
+    })
+}
+
+const sidebarItems = ref([
+    {
+        name : 'Home',
+        icon : 'home',
+        link : '/',
+        isActive : true,
+        id : 1,
+    },
+    {
+        name : "Tasks",
+        icon : 'splitscreen',
+        isActive : false,
+        link : '/tasks',
+        id : 2,
+    },
+    {
+        name : "Admin",
+        icon : 'add',
+        link : '/newTask',
+        handler : isAdmin ,
+        isActive : false,
+        id : 3,
+    },
+    {   
+        name : "Logout",
+        icon : 'logout',
+        link : '/login',
+        handler : outHandler ,
+        isActive : false,
+        id : 4,
+    }
+])
 
 </script>
 
@@ -31,44 +69,12 @@ const outHandler = async () => {
                 <h1 class="text-3xl md:text-5xl text-[#5293ee]">P.</h1>
             </div>
             <div class="w-full h-3/4 flex flex-col items-center text-white">
-                <ul>
-                    <li class="my-5 py-3 px-5 rounded-lg hover:bg-[#5293ee] hover:text-white">
-                        <NuxtLink to="/" class="flex items-center justify-center" >
-                            <div class="flex justify-center items-center">
-                                <span class="material-symbols-outlined">
-                                    home
-                                </span>
-                            </div>
-                        </NuxtLink>
-                    </li>
-                    <li class="my-5 py-3 px-5 rounded-lg hover:bg-[#5293ee] hover:text-black">
-                        <NuxtLink  to="/tasks" class="flex" >
-                            <div class="flex justify-center items-center">
-                                <span class="material-symbols-outlined">
-                                splitscreen
-                                </span>
-                            </div>
-                        </NuxtLink>
-                    </li>
-                    <li v-if="admin"  class="my-5 py-3 px-5 rounded-lg hover:bg-[#5293ee] hover:text-black">
-                        <NuxtLink  to="/newTask" class="flex" >
-                            <div class="flex justify-center items-center">
-                                <span class="material-symbols-outlined">
-                                add
-                                </span>
-                            </div>
-                        </NuxtLink>
-                    </li>
-                    <li class="my-5 py-3 px-5 rounded-lg hover:bg-[#5293ee] hover:text-black">
-                        <NuxtLink  to="/login" class="flex" @click="outHandler" >
-                            <div class="flex justify-center items-center">
-                                <span class="material-symbols-outlined">
-                                logout
-                                </span>
-                            </div>
-                        </NuxtLink>
-                    </li>
-                </ul>
+                <SidebarItem 
+                v-for="item in sidebarItems" 
+                :sidebarItem="item" 
+                @active="isItemActive" 
+                :key="item.id">
+                </SidebarItem>
             </div>
         </div>
     </div>

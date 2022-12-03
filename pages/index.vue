@@ -12,12 +12,35 @@ definePageMeta({
 const firebaseUser = useFirebaseUser()
 const userID = firebaseUser.value?.uid
 
-const status = ['All', 'Todo', 'Inprogress', 'Done']
+// const status = ['All', 'Todo', 'Inprogress', 'Done']
+
+const status = ref([
+    {
+        name : 'All',
+        isActive : true,
+    },
+    {
+        name : 'Todo',
+        isActive : false,
+    },
+    {
+        name : 'Inprogress',
+        isActive : false,
+    },
+    {
+        name : 'Done',
+        isActive : false,
+    }
+])
 
 const selectedStatus = ref('All')
 
 const filterHandler = (data) => {
     selectedStatus.value = data
+    status.value.forEach((item) => {
+        if(item.name == data) return item.isActive = true
+        item.isActive = false
+    })
 }
 
 const selectFilter = computed(() => {
@@ -25,7 +48,7 @@ const selectFilter = computed(() => {
         if(selectedStatus.value === 'All'){
             return item
         }
-        return item.statu === selectedStatus.value
+        return item.member[userID].statu === selectedStatus.value
     })
 })
 
@@ -38,13 +61,14 @@ const selectFilter = computed(() => {
     <div class="w-full h-full flex flex-col">
         <Header> </Header>
         <div class= "w-full h-full lg:h-[80%] flex-col lg:flex lg:flex-row justify-between ">
-            <div class="w-[90%] lg:w-[55%] max-h-96 lg:h-[85%] mx-auto md:mt-5 md:ml-7 px-5 flex flex-col text-white overflow-y-auto">
+            <div class="w-[90%] lg:w-[55%] lg:h-[85%] mx-auto md:mt-5 md:ml-7 px-5 flex flex-col text-white overflow-y-auto">
                 <h1 class=" text-2xl">Tasks</h1>
                 <div class="w-full mt-3 text-start">
                     <SharedButton 
                     v-for="statu in status"
-                    :handler = "() => filterHandler(statu)"
-                    :text = "statu"
+                    :handler = "() => filterHandler(statu.name)"
+                    :text = "statu.name"
+                    :class="{ 'text-[#5293ee]' : statu.isActive }"
                     class="px-1 mr-2 py-1 cursor-pointer hover:text-[#5293ee]"
                     >
                     </SharedButton>
@@ -54,7 +78,6 @@ const selectFilter = computed(() => {
             <Statistic></Statistic>
         </div>
         <TaskDetails v-if="dataStore.isModalActive" ></TaskDetails>
-
     </div>
 
 </template>

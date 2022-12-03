@@ -4,7 +4,8 @@ export default defineNuxtPlugin( () => {
         const config = useRuntimeConfig()
 
         if ($auth?.currentUser.uid !== config.ADMIN_UUID) {
-            return navigateTo('/login')
+            return abortNavigation()
+
         }
 
     }) 

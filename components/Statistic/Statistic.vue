@@ -9,12 +9,12 @@ const userID = firebaseUser.value?.uid
 
 const tabData = ref([
   {
-    name : "Line",
+    name : "Doughnut",
     isActive : true,
     id : 1
   },
   {
-    name : "Doughnut",
+    name : "Line",
     isActive : false,
     id : 2
   },
@@ -49,11 +49,12 @@ const tabHandler = (id) => {
               v-for="data in tabData"
               :text = "data.name"
               class="px-1 mr-2 py-1 cursor-pointer hover:text-[#5293ee]"
+              :class="data.isActive ? 'text-[#5293ee]' : ''"
               :handler = "() => tabHandler(data.id)">
               </SharedButton>
             </div>
-            <StatisticDoughnut v-if="tabData[1].isActive" />
-            <StatisticLine v-if="tabData[0].isActive" />
+            <StatisticDoughnut v-if="tabData[0].isActive" />
+            <StatisticLine v-if="tabData[1].isActive" />
             <StatisticRadar v-if="tabData[2].isActive" />
             <StatisticBar v-if="tabData[3].isActive" />
 

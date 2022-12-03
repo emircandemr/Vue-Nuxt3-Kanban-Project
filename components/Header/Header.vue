@@ -21,6 +21,22 @@ onBeforeMount(() => {
     dataStore.setCurrentUser(currentUser)
 })
 
+const searched = ref(null)
+const filteredData = ref(null)
+
+const searchHandler = () => {
+    dataStore.data.filter((item) => {
+     if(item.title.toLocaleLowerCase().startsWith(searched.value.toLocaleLowerCase())){
+            filteredData.value = item
+     }
+    })
+}
+
+const filteredHandler = () => {
+    dataStore.setSelectedData(filteredData.value)
+    dataStore.setModalChange()
+}
+
 
 </script>
 
@@ -28,9 +44,13 @@ onBeforeMount(() => {
     <div class="header">
             <HeaderWelcome :title="dataStore.currentUser.name"  ></HeaderWelcome>
             <div class="header__right">
-                <div class="w-full h-8 rounded-xl bg-[#212121] text-white font-medium flex justify-center items-center px-2 py-1 " >
+                <div class="w-full h-8 relative rounded-t-xl bg-[#212121] text-white font-medium flex justify-center items-center px-2 py-1 " >
                     <SharedIcon icon="search" size="w-5" color="text-gray-500" />
-                    <input class="w-full bg-transparent px-2 outline-none"  type="text">
+                    <input class="w-full bg-transparent px-2 outline-none" v-model="searched" @input="searchHandler" type="text">
+                    <div v-if="searched" class="w-full max-h-44 absolute cursor-pointer hover:text-blue-400 overflow-y-auto p-2 top-8 rounded-b-xl bg-[#121212] z-50">
+                        <p v-if="filteredData" @click="filteredHandler">{{filteredData?.title}}</p>
+                        <p v-else class="text-red-800" >Search Not Found</p>
+                    </div>
                 </div>
                 <div class="w-full h-32 flex items-center justify-around mt-4">
                     <HeaderTask v-for="data in taskData" :title="data.text" :number="data.number"></HeaderTask>
@@ -38,14 +58,16 @@ onBeforeMount(() => {
             </div>
             <div class="header__avatar">
                 <div class="h-8 flex justify-center items-center ">
-                    <div class="h-10 w-10 bg-[#212121] text-white font-medium rounded-xl flex justify-center items-center mr-2">
+                    <div class="h-10 w-10 relative bg-[#212121] text-white font-medium rounded-xl flex justify-center items-center mr-2">
                         <SharedIcon icon="notifications" size="text-3xl" color="text-gray-300" />
+                        <span class="w-2 h-2 absolute top-1 right-1 rounded-full bg-red-500"></span>
                     </div>
                     <SharedAvatar size="h-10 w-10" />
                 </div>
                 <div class="w-full h-32 flex items-center justify-around mt-4"   >
                     <HeaderTask title="Your Total Point" :number="dataStore.getPoint(userID)"></HeaderTask>
                 </div>
+            <TaskDetails v-if="dataStore.isModalActive" ></TaskDetails>
             </div>
     </div>
 </template>
