@@ -97,6 +97,7 @@ const registerHandler = async () => {
             name : inputs.value.filter((item) => item.label=="Name")[0].value,
             surname : inputs.value.filter((item) => item.label=="Surname")[0].value,
             userID : firebaseUser.value.uid,
+            image : "https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg?w=2000"
         }   
     )
     dataStore.setNotifications($toast().success("You have successfully registered"))

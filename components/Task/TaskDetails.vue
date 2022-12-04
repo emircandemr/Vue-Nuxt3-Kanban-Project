@@ -14,7 +14,7 @@ const closeHandler = () => {
         <div class="modal__layer"></div>
         <div class="modal__content relative">
             <div class="w-1/2 hidden md:block h-full rounded-xl">
-                <img class="w-full h-full rounded-xl" src="../../assets/img/task.png" alt="">
+                <img class="w-full h-full aspect-[3/2] object-cover rounded-xl" :src="dataStore.selected.image" alt="">
             </div>
             <div class="w-full md:w-1/2 h-full px-5 md:border-l md:border-dashed border-gray-300">
                 <div class="w-full h-12 p-2 flex justify-between items-center mt-8">
@@ -52,7 +52,7 @@ const closeHandler = () => {
                         <SharedAvatar 
                         v-for="data in dataStore.getMemberCount(dataStore.selected.taskID)" 
                         size="w-10"
-                        info=true
+                        :info=true
                         :name="data.name"
                         >  
                         </SharedAvatar>

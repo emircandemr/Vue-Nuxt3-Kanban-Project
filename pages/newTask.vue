@@ -6,26 +6,52 @@ definePageMeta({
     middleware : ['admin']
 
 })
-
 const dataStore = useDataStore()
+const router = useRouter()
 
-const inputData = ref({
-    id : new Date().getTime(),
-    title : '',
-    description : '',
-    category : 'High',
-    date : '',
-    image : 'https://scontent.fszf2-1.fna.fbcdn.net/v/t39.30808-6/305204204_475940821213391_7309799711632212258_n.png?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=gqOV7P8wxlUAX_g5Mg2&_nc_ht=scontent.fszf2-1.fna&oh=00_AfCfkr_yyVhnQxU6ryziDrs1OLwAYKzbZj-mXAGXitgssQ&oe=63752353' ,
-    point : '',
-    memberCount : '',
-    member : {},
-})
+const inputs = ref([
+    {
+        label : 'Title',
+        type : 'text',
+        value : "",
+        placeholder : 'Enter title',
+    },
+    {
+        label : 'Description',
+        type : 'text',
+        value : "",
+        placeholder : 'Enter description',
+    },
+    {
+        label : 'Date',
+        type : 'date',
+        value : "",
+        placeholder : 'Enter date',
+    },
+    {
+        label : 'Point',
+        type : 'number',
+        value : "",
+        placeholder : 'Enter point',
+    },
+    {
+        label : 'Member Count',
+        type : 'number',
+        value : "",
+        placeholder : 'Enter member count',
+        limit : true
+    },
+])
 
+const member = ref({})
+const category = ref('High')
+const selectedImage = ref()
+const image = ref()
 
 const addMember = (e) => {
     dataStore.user.filter((item) => {
         if(item.userID == e.target.value){
-            inputData.value.member[e.target.value] = {
+           member.value[e.target.value] = {
                 name : item.name,
                 statu : "Todo",
                 id: e.target.value
@@ -35,80 +61,87 @@ const addMember = (e) => {
 }
 
 const members = computed(() => {
-    if(inputData.value.member){
-        return Object.values(inputData.value.member)
+    if(member.value){
+        return Object.values(member.value)
     }
 })
 
-const addTask = async () => {
-    const {$toast} = useNuxtApp();
-    const checkData = Object.values(inputData.value).every((item) => {
-        return item !== ''
-    })
-    if(checkData){
-        dataStore.addTask(inputData.value)
-        await add("tasks", inputData.value)
-        inputData.value = {
-            title : '',
-            description : '',
-            category : 'High',
-            date : '',
-            image : '' ,
-            point : '',
-            memberCount : '',
-            member : {},
+const pickImage = () => {
+    const selectImage = selectedImage.value.files[0] || selectedImage.value.files
+    if(selectImage){
+        const reader = new FileReader()
+        reader.readAsDataURL(selectImage)
+        reader.onload = (e) => {
+            image.value = e.target.result
         }
-        dataStore.setNotifications($toast().success("Task successfully added",{
-            icon : "😎👌",
-            background : "#22559c",
-            barBackground : "#7CB9E8",
-        }))
     }
 }
+console.log(selectedImage)
 
-const deleteMember = (member) => {
-    delete inputData.value.member[member.id]
+const addTask = async () => {
+    const {$toast} = useNuxtApp();
+    const title = inputs.value.filter((item) => item.label == 'Title')[0].value
+    const description = inputs.value.filter((item) => item.label == 'Description')[0].value
+    const date = inputs.value.filter((item) => item.label == 'Date')[0].value
+    const point = inputs.value.filter((item) => item.label == 'Point')[0].value
+    const memberCount = inputs.value.filter((item) => item.label == 'Member Count')[0].value
+
+    const data = {
+        id : new Date().getTime(),
+        title : title,
+        description : description,
+        category : category.value,
+        date : date,
+        image : image.value || 'https://scontent.fszf2-1.fna.fbcdn.net/v/t39.30808-6/305204204_475940821213391_7309799711632212258_n.png?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=gqOV7P8wxlUAX_g5Mg2&_nc_ht=scontent.fszf2-1.fna&oh=00_AfCfkr_yyVhnQxU6ryziDrs1OLwAYKzbZj-mXAGXitgssQ&oe=63752353' ,
+        point : point,
+        memberCount : memberCount,
+        member : member.value
+    }
+
+    if(title && description && date && point && memberCount){
+        console.log(data)
+        dataStore.addTask(data)
+        await add("tasks", data)
+        dataStore.setNotifications($toast().success('Task added'))
+        router.push('/tasks')
+}
 }
 
-
-
+const deleteMember = (id) => {
+    delete member.value[id]
+}
 </script>
 
 <template>
     <div class="w-full h-full flex justify-center items-center">
         <div class="w-[95%] lg:w-3/5 min-h-[90%] max-h-full p-3 overflow-y-auto fixed bg-[#212121] rounded-2xl flex flex-col justify-center items-center text-white">
             <h1 class="text-2xl text-center font-bold text-gray-200">New Task</h1>
-            <div class="w-[90%] lg:w-2/3 text-white">
-                <label for="title" >Title</label>
-                <input v-model="inputData.title" type="text" id="title" placeholder="Title" class="w-full  bg-[#121212] rounded-lg p-2">
-            </div>
-            <div class="w-[90%] lg:w-2/3  text-white">
-                <label for="description">Description</label>
-                <textarea id="description" v-model="inputData.description" placeholder="Description" class="w-full h-32 bg-[#121212] rounded-lg p-2"></textarea>
+            <div  v-for="(input, index) in inputs" :key="index"  class="w-[90%] lg:w-2/3 mt-3 text-white">
+                <SharedInput 
+                v-model:value="input.value"
+                :label="input.label"
+                :type="input.type"
+                :placeHolder="input.placeholder"
+                :limit = "input.limit"
+                class="w-full p-2 mt-5 text-md bg-[#121212] rounded-lg">
+                </SharedInput>
             </div>
             <div class="w-[90%] lg:w-2/3">
                 <label for="image" class="text-white">Image</label>
-                <input type="file"  id="image" class="w-full  bg-[#121212] rounded-lg py-1 px-1">
-            </div>
-            <div class="w-[90%] lg:w-2/3 mt-2">
-                <label for="date" class="text-white"> Submit Date</label>
-                <input type="date" id="date" v-model="inputData.date" class="date w-full  text-gray-300 bg-[#121212] rounded-lg p-2">
-            </div>
-            <div class="w-[90%] lg:w-2/3 mt-2">
-                <label for="point" class="text-white">Point</label>
-                <input type="number" id="point" v-model="inputData.point" placeholder="Point" class="w-full  text-gray-300 bg-[#121212] rounded-lg p-2">
+                <input type="file" 
+                ref="selectedImage" 
+                accept=".jpg, .jpeg, .png" 
+                id="image" 
+                @input = "pickImage"
+                class="w-full  bg-[#121212] rounded-lg py-1 px-1">
             </div>
             <div class="w-[90%] lg:w-2/3 mt-2">
                 <label for="category" class="text-white">Status</label>
-                <select id="category" v-model="inputData.category" class="w-full  text-gray-300 bg-[#121212] rounded-lg p-2">
+                <select id="category" v-model="category" class="w-full  text-gray-300 bg-[#121212] rounded-lg p-2">
                     <option value="High">High</option>
                     <option value="Medium">Medium</option>
                     <option value="Low">Low</option>
                 </select>
-            </div>
-            <div class="w-[90%] lg:w-2/3 mt-2">
-                <label for="point" class="text-white">Member Count</label>
-                <input type="number"  v-model="inputData.memberCount" id="point" :onKeyUp="inputData.memberCount > 5 ?   inputData.memberCount = 5 : inputData.memberCount" placeholder="Point" class="w-full h-10 text-gray-300 bg-[#121212] rounded-lg p-2">
             </div>
             <div class="w-[90%] lg:w-2/3 flex flex-col mt-2">
                 <label for="status" class="text-white">Member</label>
@@ -118,7 +151,7 @@ const deleteMember = (member) => {
                     </select>
                     <div class="w-[90%] lg:w-2/3 flex flex-wrap text-gray-300 bg-[#121212] rounded-r-lg justify-start items-center px-1">
                         <span v-for="member in members" class="text-gray-300 flex justify-center items-center border border-gray-500 rounded-md p-1 m-1">{{member.name}} 
-                            <span @click="deleteMember(member)" class="text-md ml-1 material-symbols-outlined hover:text-red-900 cursor-pointer" >
+                            <span @click="deleteMember(member.id)" class="text-md ml-1 material-symbols-outlined hover:text-red-900 cursor-pointer" >
                                 cancel
                             </span>
                         </span>
@@ -128,6 +161,7 @@ const deleteMember = (member) => {
             <div class="w-[90%] lg:w-2/3 mt-5">
                 <button @click="addTask" class="w-full h-10 bg-blue-500 text-white rounded-md">Submit</button>
             </div>
+            {{image}}
         </div>
     </div>
 </template>

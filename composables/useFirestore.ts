@@ -63,11 +63,8 @@ import {
     return docRef;
 
   };
-
-
-
   
-  export const del = async (col : string, id : string) => {
+  export const deleteByCollection = async (col : string, id : string) => {
     const {$db} = useNuxtApp();
 
     const docRef = doc($db, col, id);

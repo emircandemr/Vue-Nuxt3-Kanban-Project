@@ -37,12 +37,24 @@ export const useDataStore = defineStore("data", {
             event.dataTransfer.effectAllowed = "move";
             event.dataTransfer.setData("id", item.id);
         },
-        DropData(event,statu,userID){
-            console.log(event.target,statu,userID)
+        async DropData(event,statu,userID){
             const itemID = event.dataTransfer.getData("id");
-            console.log("itemID",itemID)
             const index = this.data.findIndex(item => item.id === parseInt(itemID))
             this.data[index].member[userID].statu = statu
+            const activity = {
+                name : this.data[index].member[userID].name,
+                statu : statu,
+                date : new Date().getTime(),
+                title : this.data[index].title,
+                image : this.data[index].member[userID].image,
+            }
+            this.activity.unshift(activity)
+            await add("activity",activity)
+            if(this.activity.length > 15){
+                this.activity.pop()
+                const id = this.activity[this.activity.length - 1].taskID
+                await deleteByCollection("activity",id)
+            }
         },
         setModalChange(){
             this.isModalActive = !this.isModalActive
@@ -53,7 +65,8 @@ export const useDataStore = defineStore("data", {
                     if(!item.member[cur.userID]){
                     acc[cur.userID] = {
                         name : cur.name,
-                        statu : "Backlog"
+                        statu : "Backlog",
+                        image : cur.image,
                     }}
                     return acc
                 },{...item.member}
@@ -75,6 +88,7 @@ export const useDataStore = defineStore("data", {
             this.data = []
             this.user= []
             this.selected = ""
+            this.activity = []
         },
         getPoint(id) {
             return this.data.filter(item => item.member[id]?.statu === "Done").reduce((a, b) => a + b.point, 0)

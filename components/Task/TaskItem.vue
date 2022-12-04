@@ -66,14 +66,14 @@ const dragActiveHandler = () => {
 
 const activityHandler = () => {
     
-    dataStore.setActivity(
-        {
-            name : dataStore.currentUser.name,
-            title : props.item.title,
-            statu : props.statu,
-            date : new Date().getTime()
-        }
-    )
+    // dataStore.setActivity(
+    //     {
+    //         name : dataStore.currentUser.name,
+    //         title : props.item.title,
+    //         statu : props.statu,
+    //         date : new Date().getTime()
+    //     }
+    // )
 }
 
 const modalHandler = () => {

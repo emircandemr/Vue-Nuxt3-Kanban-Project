@@ -15,14 +15,6 @@ onMounted(async () => {
     dataStore.setUserToData(userID)
 })
 
-// watchEffect(async () => {
-//     await add("activity", {
-//         name : dataStore.user[userID].name,
-//         title : "Login",
-//         statu : "Login",
-//         date : new Date().getTime()
-//     })
-// })
 
 const status = ['Backlog', 'Todo', 'Inprogress', 'Done']
 

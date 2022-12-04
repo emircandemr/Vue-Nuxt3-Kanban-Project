@@ -2,31 +2,25 @@
 import {useDataStore} from '../../stores/use-Data'
 
 const dataStore = useDataStore()
-const recentlyData = ref([])
 
-// watchEffect(async () => {
-//   recentlyData.value = await queryByCollection("activity")
-//   console.log(recentlyData.value)
-//   recentlyData.value.sort((a, b) => b.date - a.date)
-// },dataStore.data)
-
-// watchEffect(async () => {
-//     console.log(props.item.member[userID])
-//     await add("activity", )
-// }, props.item.member[userID].statu)
-
-
+onMounted(async () => {
+   const recentlyData = await queryByCollection("activity")
+   recentlyData.map((item) => {
+     dataStore.setActivity(item)
+     dataStore.activity.sort((a,b) => b.date - a.date)
+   })
+})
 
 </script>
 
 <template>
-    <div class="w-64 h-[90%] bg-[#212121] rounded-xl hidden lg:flex flex-col items-center py-3 overflow-y-auto">
+    <div class="deneme w-64 h-[90%] bg-[#212121] rounded-xl hidden lg:flex flex-col items-center py-3 overflow-y-auto">
         <h1 class="text-xl mb-5 text-white font-bold ">Recent Activity</h1>
         <!-- {{dataStore.activity}} -->
         <div v-for="data in dataStore.activity" class="w-[90%] my-1 flex items-start justify-center px-2 ">
             <div class="relative">
-                <SharedAvatar size="h-10 w-10" />
-                <span class="border absolute h-14 left-[18px] bg-gray-500"></span>
+                <SharedAvatar size="h-10 w-10" :pic="data.image" />
+                <span class="border absolute h-14 left-[18px] bg-gray-500" ></span>
             </div>
             <div class="w-[80%] ml-2">
                 <p class="text-sm text-white">
@@ -67,5 +61,20 @@ const recentlyData = ref([])
     color:  #5293ee;
 }
 
+.deneme::-webkit-scrollbar {
+    width: 6px;
+}
+ 
+.deneme::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+
+}
+ 
+.deneme::-webkit-scrollbar-thumb {
+  background-color: #393e46;
+  outline: 1px solid #121212;
+  border-radius: 20px;
+
+}
 
 </style>

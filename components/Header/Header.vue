@@ -19,6 +19,7 @@ const taskData = [
 onBeforeMount(() => {
     const currentUser = dataStore.user.find((item) => item.userID === userID)
     dataStore.setCurrentUser(currentUser)
+    console.log(currentUser)
 })
 
 const searched = ref(null)
@@ -62,7 +63,7 @@ const filteredHandler = () => {
                         <SharedIcon icon="notifications" size="text-3xl" color="text-gray-300" />
                         <span class="w-2 h-2 absolute top-1 right-1 rounded-full bg-red-500"></span>
                     </div>
-                    <SharedAvatar size="h-10 w-10" />
+                    <SharedAvatar size="h-10 w-10" :isPic=true :pic="dataStore.currentUser.image" />
                 </div>
                 <div class="w-full h-32 flex items-center justify-around mt-4"   >
                     <HeaderTask title="Your Total Point" :number="dataStore.getPoint(userID)"></HeaderTask>

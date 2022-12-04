@@ -16,6 +16,20 @@ defineProps({
         required : false,
         default : "text"
     },
+    placeHolder: {
+        type : String,
+        required : false,
+    },
+    class: {
+        type : String,
+        required : false,
+        default :"w-full bg-transparent mt-3 p-1 outline-none"
+    },
+    limit : {
+        type : Boolean,
+        required : false,
+        default : false
+    }
 })
 
 const emits = defineEmits(["update:value"])
@@ -28,14 +42,16 @@ const getValue = (e) => {
 
 <template>
     <div class="w-full  flex flex-col justify-center items-center relative">
-        <label :for="type" class="w-full absolute top-0 left-2 text-sm font-medium text-gray-400 ">{{label}}</label>
+        <label :for="type" class="w-full absolute -top-1 left-1 text-sm font-medium text-gray-400 ">{{label}}</label>
         <input 
         :type="type"
         :id="type"
         :value="value"
+        :placeholder="placeHolder"
         @input = "getValue"
         autocomplete="off"
-        class="w-full bg-transparent mt-3 p-2 outline-none" />
+        :onKeyup = "limit ? value > 5 ? value = 5 : value : ''"  
+        :class="class" />
     </div>
 </template>
 
