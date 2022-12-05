@@ -87,7 +87,7 @@ const chartOptions = ref({
     <Doughnut
     :chart-data="chartData"
     :options="chartOptions"
-    styles="width: 70%; height: 60%;"
+    style="width: 70%; height: 60%;"
     />
 </template>
 

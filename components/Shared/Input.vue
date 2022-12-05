@@ -26,9 +26,8 @@ defineProps({
         default :"w-full bg-transparent mt-3 p-1 outline-none"
     },
     limit : {
-        type : Boolean,
+        type : Number,
         required : false,
-        default : false
     }
 })
 
@@ -50,7 +49,7 @@ const getValue = (e) => {
         :placeholder="placeHolder"
         @input = "getValue"
         autocomplete="off"
-        :onKeyup = "limit ? value > 5 ? value = 5 : value : ''"  
+        :onKeyup="value > limit ? value = limit : null"
         :class="class" />
     </div>
 </template>

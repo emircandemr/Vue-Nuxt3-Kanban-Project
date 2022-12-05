@@ -21,7 +21,7 @@ const status = ['Backlog', 'Todo', 'Inprogress', 'Done']
 </script>
 <template>
     <div class="w-full h-full grid grid-cols-1 md:grid-cols-2 md:min-h-full xl:flex justify-center items-center text-white">
-        <div v-for="statu in status" class="w-full  overflow-y-auto px-5 h-full flex flex-col items-center"
+        <div v-for="statu in status" class="w-full scroll-bar overflow-y-auto px-5 h-full flex flex-col items-center"
         @drop="dataStore.DropData($event, statu, userID)"
         @dragenter.prevent
         @dragover.prevent>

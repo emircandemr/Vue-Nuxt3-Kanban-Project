@@ -105,8 +105,6 @@ const registerHandler = async () => {
   
 }
 
-
-
 </script>
 
 <template>

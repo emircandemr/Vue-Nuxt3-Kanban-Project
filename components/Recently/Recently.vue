@@ -14,9 +14,8 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="deneme w-64 h-[90%] bg-[#212121] rounded-xl hidden lg:flex flex-col items-center py-3 overflow-y-auto">
+    <div class="scroll-bar w-64 h-[90%] bg-[#212121] rounded-xl hidden lg:flex flex-col items-center py-3 overflow-y-auto">
         <h1 class="text-xl mb-5 text-white font-bold ">Recent Activity</h1>
-        <!-- {{dataStore.activity}} -->
         <div v-for="data in dataStore.activity" class="w-[90%] my-1 flex items-start justify-center px-2 ">
             <div class="relative">
                 <SharedAvatar size="h-10 w-10" :pic="data.image" />
@@ -61,16 +60,16 @@ onMounted(async () => {
     color:  #5293ee;
 }
 
-.deneme::-webkit-scrollbar {
+.scroll-bar::-webkit-scrollbar {
     width: 6px;
 }
  
-.deneme::-webkit-scrollbar-track {
+.scroll-bar::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 
 }
  
-.deneme::-webkit-scrollbar-thumb {
+.scroll-bar::-webkit-scrollbar-thumb {
   background-color: #393e46;
   outline: 1px solid #121212;
   border-radius: 20px;

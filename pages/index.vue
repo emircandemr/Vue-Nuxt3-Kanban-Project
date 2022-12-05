@@ -61,9 +61,9 @@ const selectFilter = computed(() => {
     <div class="w-full h-full flex flex-col">
         <Header> </Header>
         <div class= "w-full h-full lg:h-[80%] flex-col lg:flex lg:flex-row justify-between ">
-            <div class="w-[90%] lg:w-[55%] lg:h-[85%] mx-auto md:mt-5 md:ml-7 pl-3 flex flex-col text-white overflow-y-auto">
+            <div class="scroll-bar w-[90%] lg:w-[55%] lg:h-full mx-auto md:mt-5 md:ml-7 pl-3 flex flex-col text-white overflow-y-auto">
                 <h1 class=" text-2xl">Tasks</h1>
-                <div class="w-full mt-3 text-start">
+                <div class="w-full mt-2 text-start">
                     <SharedButton 
                     v-for="statu in status"
                     :handler = "() => filterHandler(statu.name)"
@@ -101,30 +101,3 @@ const selectFilter = computed(() => {
 }
 
 </style>
-
-<!-- <div v-for="item in selectFilter" class="w-full h-20 mt-5 py-3 bg-[#212121] rounded-2xl flex items-center"> -->
-                    <!-- <img class="w-14 h-14 rounded-md ml-2" src="../assets/img/task.png" alt="">
-                    <div class="w-[50%] h-14 ml-3 flex flex-col justify-center">
-                        <h2 class="text-sm">{{item.title}}</h2>
-                        <p class="text-sm truncate">{{item.description}}</p>
-                    </div>
-                    <div class="w-[10%] h-14 ml-3 flex flex-col items-center justify-center">
-                        <span class="text-sm material-symbols-outlined">
-                        favorite
-                        </span>
-                        <span class="mt-1 text-xs ">
-                        +{{item.point}}
-                        </span>
-                    </div>
-                    <div class="w-[10%] h-14 ml-5 flex flex-col items-center justify-center">
-                        <span class="text-sm material-symbols-outlined">
-                        star
-                        </span>
-                        <span class="mt-1 text-xs ">
-                        {{item.category}}
-                        </span>
-                    </div>
-                    <div class="w-[10%] h-8 rounded-lg bg-[#22559c]  cursor-pointer ml-5 text-sm flex items-center justify-center">
-                        Inspect
-                    </div> -->
-                <!-- </div> -->

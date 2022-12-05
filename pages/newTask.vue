@@ -3,8 +3,7 @@ import { useDataStore } from '~~/stores/use-Data';
 
 definePageMeta({
     layout : 'content',
-    middleware : ['admin']
-
+    middleware : ['admin', 'auth']
 })
 const dataStore = useDataStore()
 const router = useRouter()
@@ -33,13 +32,14 @@ const inputs = ref([
         type : 'number',
         value : "",
         placeholder : 'Enter point',
+        limit : 999
     },
     {
         label : 'Member Count',
         type : 'number',
         value : "",
         placeholder : 'Enter member count',
-        limit : true
+        limit : 5
     },
 ])
 
@@ -54,7 +54,7 @@ const addMember = (e) => {
            member.value[e.target.value] = {
                 name : item.name,
                 statu : "Todo",
-                id: e.target.value
+                id: e.target.value,
             }
         }
     })
@@ -76,7 +76,6 @@ const pickImage = () => {
         }
     }
 }
-console.log(selectedImage)
 
 const addTask = async () => {
     const {$toast} = useNuxtApp();
@@ -85,25 +84,26 @@ const addTask = async () => {
     const date = inputs.value.filter((item) => item.label == 'Date')[0].value
     const point = inputs.value.filter((item) => item.label == 'Point')[0].value
     const memberCount = inputs.value.filter((item) => item.label == 'Member Count')[0].value
-
+    
     const data = {
         id : new Date().getTime(),
         title : title,
         description : description,
         category : category.value,
         date : date,
-        image : image.value || 'https://scontent.fszf2-1.fna.fbcdn.net/v/t39.30808-6/305204204_475940821213391_7309799711632212258_n.png?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=gqOV7P8wxlUAX_g5Mg2&_nc_ht=scontent.fszf2-1.fna&oh=00_AfCfkr_yyVhnQxU6ryziDrs1OLwAYKzbZj-mXAGXitgssQ&oe=63752353' ,
-        point : point,
+        taskImage : image.value ||  "https://user-images.githubusercontent.com/72731296/205636356-6b460e79-44d8-49b1-b88a-b4c5bd004bcd.png" ,
+        point : Number(point),
         memberCount : memberCount,
         member : member.value
     }
 
+
     if(title && description && date && point && memberCount){
-        console.log(data)
         dataStore.addTask(data)
         await add("tasks", data)
         dataStore.setNotifications($toast().success('Task added'))
         router.push('/tasks')
+        member.value = {}
 }
 }
 
@@ -122,7 +122,7 @@ const deleteMember = (id) => {
                 :label="input.label"
                 :type="input.type"
                 :placeHolder="input.placeholder"
-                :limit = "input.limit"
+                :limit="input.limit"
                 class="w-full p-2 mt-5 text-md bg-[#121212] rounded-lg">
                 </SharedInput>
             </div>
@@ -161,17 +161,32 @@ const deleteMember = (id) => {
             <div class="w-[90%] lg:w-2/3 mt-5">
                 <button @click="addTask" class="w-full h-10 bg-blue-500 text-white rounded-md">Submit</button>
             </div>
-            {{image}}
         </div>
     </div>
 </template>
 
 
-<style scoped>
+<style>
 
 .date::-webkit-calendar-picker-indicator{
     filter: invert(1);
     cursor: pointer;
+}
+
+.scroll-bar::-webkit-scrollbar {
+    width: 6px;
+}
+ 
+.scroll-bar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+
+}
+ 
+.scroll-bar::-webkit-scrollbar-thumb {
+  background-color: #393e46;
+  outline: 1px solid #121212;
+  border-radius: 20px;
+
 }
 
 

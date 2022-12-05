@@ -17,7 +17,10 @@ const isAdmin = () => {
     const {$toast} = useNuxtApp();
     const config = useRuntimeConfig()
     if(userID == config.ADMIN_UUID) return true
-    dataStore.setNotifications($toast().warning("Please Login as Admin"))
+    else {
+        dataStore.setNotifications($toast().warning("Please Login as Admin"))
+        return false
+    }
 }
 
 const isItemActive = (id) => {

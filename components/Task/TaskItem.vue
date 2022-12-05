@@ -14,67 +14,23 @@ const dragActiveHandler = () => {
     isDragActive.value = !isDragActive.value
 }
 
-// const dragLeaveHandler = () => {
-//     isDragActive.value = false
-// }
-
-
-// watch(dataStore.data, async () => {
-//     // await update("tasks", props.item.taskID, {
-//     //     member : {
-//     //         ...props.item.member,
-//     //         [userID] : {
-//     //             name : props.item.member[userID].name,
-//     //             statu : props.item.member[userID].statu
-//     //         }
-//     //     }
-
-//     // })
-
-//     dataStore.setActivity(
-//         {
-//             name : dataStore.currentUser.name,
-//             title : props.item.title,
-//             statu : props.statu,
-//             date : new Date().getTime()
-//         }
-//     )
-// })
-
-// watchEffect(async () => {
-//     // await update("tasks", props.item.taskID, {
-//     //     member : {
-//     //         ...props.item.member,
-//     //         [userID] : {
-//     //             name : props.item.member[userID].name,
-//     //             statu : props.item.member[userID].statu
-//     //         }
-//     //     }
-
-//     // })
-
-//     dataStore.setActivity(
-//         {
-//             name : dataStore.currentUser.name,
-//             title : props.item.title,
-//             statu : props.statu,
-//             date : new Date().getTime()
-//         }
-//     )
-
-// })
-
-const activityHandler = () => {
-    
-    // dataStore.setActivity(
-    //     {
-    //         name : dataStore.currentUser.name,
-    //         title : props.item.title,
-    //         statu : props.statu,
-    //         date : new Date().getTime()
-    //     }
-    // )
+const dragLeaveHandler = () => {
+    isDragActive.value = false
 }
+
+watchEffect(async () => {
+    await update("tasks", props.item.taskID, {
+        member : {
+            ...props.item.member,
+            [userID] : {
+                name : props.item.member[userID].name,
+                statu : props.item.member[userID].statu
+            }
+        }
+
+    })
+})
+
 
 const modalHandler = () => {
     dataStore.setModalChange()
@@ -87,7 +43,7 @@ const modalHandler = () => {
     draggable="true"
     @dragstart="dataStore.StartDragData($event,props.item)"
     @dragenter.prevent = "dragActiveHandler"
-    @dragend.prevent = "activityHandler"
+    @dragend.prevent = "dragLeaveHandler"
     :class="{'active' : isDragActive}">
     <div class="w-full h-8 flex justify-between items-center ">
         <Badge 

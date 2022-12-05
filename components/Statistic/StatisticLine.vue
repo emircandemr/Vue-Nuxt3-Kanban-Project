@@ -85,7 +85,7 @@ const chartOptions = ref({
     <Line
     :chart-data="chartData"
     :options="chartOptions"
-    styles="width: 60%; height: 60%;"
+    style="width: 60%; height: 60%;"
     />
 </template>
 

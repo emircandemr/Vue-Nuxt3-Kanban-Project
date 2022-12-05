@@ -55,8 +55,6 @@ const chartData = ref({
                 'rgba(255, 205, 86, 0.5)',
                 'rgba(75, 192, 192, 0.5)',
             ],
-            
-            
         }
     ]
 })
@@ -84,7 +82,7 @@ const chartOptions = ref({
     <PolarArea
     :chart-data="chartData"
     :options="chartOptions"
-    styles="width: 70%; height: 60%;"
+    style="width: 70%; height: 60%;"
     />
 </template>
 

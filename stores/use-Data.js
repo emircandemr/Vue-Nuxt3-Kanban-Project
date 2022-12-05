@@ -17,6 +17,10 @@ export const useDataStore = defineStore("data", {
         setActivity(activity){
             this.activity.unshift(activity)
         },
+        updateProfilePhoto(photo){
+            this.currentUser.image = photo  
+            this.user.filter(user => user.userID === this.currentUser.userID)[0].image = photo    
+        },
         setNotifications(notifications){
             this.notifications.push(notifications)
         },
@@ -46,7 +50,7 @@ export const useDataStore = defineStore("data", {
                 statu : statu,
                 date : new Date().getTime(),
                 title : this.data[index].title,
-                image : this.data[index].member[userID].image,
+                image : this.currentUser.image,
             }
             this.activity.unshift(activity)
             await add("activity",activity)
@@ -66,7 +70,6 @@ export const useDataStore = defineStore("data", {
                     acc[cur.userID] = {
                         name : cur.name,
                         statu : "Backlog",
-                        image : cur.image,
                     }}
                     return acc
                 },{...item.member}
@@ -74,10 +77,10 @@ export const useDataStore = defineStore("data", {
                 return item
             })
         },
-        setUser(user){
+        setUser(user){ //
             this.user.push(user)
         },
-        addTask(data){
+        addTask(data){ //
             this.data.push(data)
         },
         setFavorite(id){

@@ -1,16 +1,10 @@
 import {
     collection,
     getDocs,
-    getDoc,
     addDoc,
     deleteDoc,
     doc,
-    query,
-    where,
     setDoc,
-    collectionGroup,
-    Timestamp,
-    documentId,
     updateDoc,
   } from "firebase/firestore";
 
@@ -26,7 +20,6 @@ import {
     const docs = Array.from(snapshot.docs).map((doc) => {
       return {
         ...doc.data(),
-        // id: new Date().getTime(),
         taskID : doc.id
       };
     });

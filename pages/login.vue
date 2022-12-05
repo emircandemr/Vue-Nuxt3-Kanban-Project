@@ -89,17 +89,6 @@ const loginHandler = async () => {
     }
 }
 
-onMounted(async () => {
-    // const user = await getUser()
-    // if(user){
-    //     router.push({ path: "/" })
-    // }
-
-    console.log(dataStore.user)
-
-})
-
-
 </script>
 
 <template>

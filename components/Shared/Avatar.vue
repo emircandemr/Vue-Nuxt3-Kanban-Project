@@ -46,14 +46,19 @@ const pickImage = async () => {
         reader.readAsDataURL(selectedImage)
         reader.onload = (e) => {
             image.value = e.target.result
+            dataStore.updateProfilePhoto(e.target.result)
+            console.log(dataStore.user)
         }
     }
-    console.log(image.value)
-    await update("users", dataStore.currentUser.taskID, {
-        image : image.value
-    })
-    console.log(dataStore.user)
 }
+
+onUnmounted(async () => {
+    if(image.value){
+        await update("users", dataStore.currentUser.taskID, {
+            image : image.value
+        })
+    }
+})
 
 const imageHandler = () => {
     document.querySelector('#image').click()

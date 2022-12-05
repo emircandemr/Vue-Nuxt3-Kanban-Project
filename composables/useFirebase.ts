@@ -41,19 +41,7 @@ export const initUser = () => {
     const auth = getAuth()
     const firebaseUser = useFirebaseUser();
     firebaseUser.value = auth.currentUser;
-    // const user = ref(null)
-    // const isAuthenticated = ref(false)
-
     onAuthStateChanged(auth, (user) => {
-        if (user) {
-            console.log("deneme" , user)
-            // isAuthenticated.value = true
-            // user = user
-        } else {
-            console.log("deneme2" , user)
-            // isAuthenticated.value = false
-            // user = null
-        }
         firebaseUser.value = user;
     })
 
