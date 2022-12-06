@@ -29,6 +29,3 @@ const dataStore = useDataStore()
 }
 
 </style>
-
-<!-- bg-[#0f0f0f] -->
-<!-- bg-[#272a37] -->

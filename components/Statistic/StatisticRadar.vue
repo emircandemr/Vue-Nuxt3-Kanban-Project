@@ -1,5 +1,5 @@
 <script setup>
-import { Doughnut,Line,Bubble,PolarArea,Radar } from 'vue-chartjs'
+import { PolarArea} from 'vue-chartjs'
 import {  ref } from "vue";
 import {
   Chart as ChartJS,

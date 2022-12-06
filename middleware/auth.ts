@@ -7,15 +7,3 @@ export default defineNuxtRouteMiddleware( (to,from) => {
     }
     
 })
-
-// export default defineNuxtPlugin( () => {
-//     addRouteMiddleware('auth', ()=> {
-//         const {$auth} = useNuxtApp();
-//         if (!$auth?.currentUser) {
-//             signOut();
-//             return navigateTo('/login')
-//         }
-
-//     }) 
-
-// })

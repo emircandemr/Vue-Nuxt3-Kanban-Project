@@ -11,10 +11,8 @@ const dataStore = useDataStore()
                     <slot></slot>
             </div>
         <NotificationList :notifications="dataStore.notifications" ></NotificationList>
-
         </div>
 </template>
-
 
 <style scoped>
 

@@ -129,7 +129,6 @@ const loginHandler = async () => {
            :disabled="emailValid && passwordValid === true ? false : true"
            :handler="loginHandler" 
            ></SharedButton>
-            <!-- <button @click="loginHandler" class="w-1/2 px-3 py-3 bg-[#22559c] text-white rounded-xl">Login</button> -->
         </div>
     </div>
 </template>

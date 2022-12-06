@@ -29,7 +29,7 @@ defineProps({
 
 <template>
     <span 
-    class="py-1 px-1 flex justify-center items-center rounded-md text-center text-xs"
+    class="badge"
     :class="size ,color, background">
     <slot></slot>
         {{text}}
@@ -38,6 +38,11 @@ defineProps({
 
 
 <style scoped>
+
+.badge{
+    @apply py-1 px-1 flex justify-center items-center rounded-md text-center text-xs
+}
+
 .High{
     background-color: #e09696;
     color: #4a0e0e;

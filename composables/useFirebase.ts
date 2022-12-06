@@ -4,7 +4,6 @@
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
  } from 'firebase/auth'
-import { ref } from 'vue'
 import { useFirebaseUser } from './useStates'
 
 export const createUser = async (email: string, password: string) => {
@@ -35,8 +34,6 @@ export const signOut = async () => {
     return userCredential
 }
 
-
-
 export const initUser = () => {
     const auth = getAuth()
     const firebaseUser = useFirebaseUser();
@@ -44,6 +41,4 @@ export const initUser = () => {
     onAuthStateChanged(auth, (user) => {
         firebaseUser.value = user;
     })
-
-    // return { user, isAuthenticated }
 }

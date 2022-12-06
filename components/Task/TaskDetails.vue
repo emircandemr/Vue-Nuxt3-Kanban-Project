@@ -94,7 +94,6 @@ const closeHandler = () => {
     @apply w-full h-full bg-black bg-opacity-20  ;
     backdrop-filter: blur(1px);
 }
-
 .modal__content{
     @apply w-[90%] h-2/5 md:h-[45%] lg:w-3/5 xl:w-2/5 lg:h-2/5 absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]  bg-white rounded-xl shadow-xl flex justify-center items-center;
 }

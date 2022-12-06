@@ -12,8 +12,6 @@ definePageMeta({
 const firebaseUser = useFirebaseUser()
 const userID = firebaseUser.value?.uid
 
-// const status = ['All', 'Todo', 'Inprogress', 'Done']
-
 const status = ref([
     {
         name : 'All',
@@ -51,9 +49,6 @@ const selectFilter = computed(() => {
         return item.member[userID].statu === selectedStatus.value
     })
 })
-
-
-
 
 </script>
 

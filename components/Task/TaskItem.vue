@@ -31,7 +31,6 @@ watchEffect(async () => {
     })
 })
 
-
 const modalHandler = () => {
     dataStore.setModalChange()
     dataStore.setSelectedData(props.item)

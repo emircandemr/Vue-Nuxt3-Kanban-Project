@@ -27,13 +27,6 @@ defineProps({
             <h1 class="text-md text-gray-200 font-bold text-center">Congratulations !</h1>
             <p class="text-xs text-gray-200 truncate mt-2 font-semibold text-center">You earned {{point}} points for completing the mission</p>
         </div>
-        <!-- <div class="w-full h-10 flex justify-center items-center ">
-            <SharedButton
-            text="Review"
-            class="w-14 p-1 rounded-md text-xs bg-[#edf0f7] text-black hover:bg-[#2d2d2d] hover:text-white">
-            </SharedButton>
-        </div> -->
-
     </div>
 </template>
 

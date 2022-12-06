@@ -1,5 +1,5 @@
 <script setup>
-import { Doughnut,Line,Bubble,PolarArea } from 'vue-chartjs'
+import { Doughnut } from 'vue-chartjs'
 import {  ref } from "vue";
 import {
   Chart as ChartJS,
@@ -12,12 +12,6 @@ import {
   LineElement,
   PointElement,
   ArcElement,
-  DoughnutController,
-  BarController,
-  LineController,
-  BubbleController,
-  PolarAreaController,
-  RadialLinearScale
 } from "chart.js";
 import { useDataStore } from '../../stores/use-Data'
 

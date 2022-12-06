@@ -146,10 +146,6 @@ const registerHandler = async () => {
            :disabled=!formValid
            :handler="registerHandler" 
            ></SharedButton>
-            <!-- <button @click=registerHandler
-            :disabled= !formValid
-            :class="{'bg-green-800 cursor-pointer hover:bg-green-700' : formValid, 'cursor-not-allowed bg-[#22559c]' : !formValid }"
-            class="w-full md:w-1/2 lg:w-full px-3 py-3  text-white rounded-xl ">Create New Account</button> -->
         </div>
     </div>                                                            
 </template>

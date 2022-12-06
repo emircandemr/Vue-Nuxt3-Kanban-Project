@@ -8,8 +8,6 @@ import {
     updateDoc,
   } from "firebase/firestore";
 
-  
-
   export const queryByCollection = async (col: string) => {
     const {$db} = useNuxtApp();
     // @ts-ignore

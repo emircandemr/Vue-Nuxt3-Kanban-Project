@@ -43,7 +43,7 @@ const filteredHandler = () => {
 <template>
     <div class="header">
             <HeaderWelcome :title="dataStore.currentUser.name"  ></HeaderWelcome>
-            <div class="header__right">
+            <div class="header__task">
                 <div class="w-full h-8 relative rounded-t-xl bg-[#212121] text-white font-medium flex justify-center items-center px-2 py-1 " >
                     <SharedIcon icon="search" size="w-5" color="text-gray-500" />
                     <input class="w-full bg-transparent px-2 outline-none" v-model="searched" @input="searchHandler" type="text">
@@ -53,7 +53,7 @@ const filteredHandler = () => {
                     </div>
                 </div>
                 <div class="w-full h-32 flex items-center justify-around mt-4">
-                    <HeaderTask v-for="data in taskData" :title="data.text" :number="data.number"></HeaderTask>
+                    <HeaderItem v-for="data in taskData" :title="data.text" :number="data.number"></HeaderItem>
                 </div>
             </div>
             <div class="header__avatar">
@@ -65,7 +65,7 @@ const filteredHandler = () => {
                     <SharedAvatar size="h-10 w-10" :isPic=true :pic="dataStore.currentUser.image " />
                 </div>
                 <div class="w-full h-32 flex items-center justify-around mt-4 text-white"   >
-                    <HeaderTask title="Your Total Point" :number="dataStore.getPoint(userID)"></HeaderTask>
+                    <HeaderItem title="Your Total Point" :number="dataStore.getPoint(userID)"></HeaderItem>
                 </div>
             <TaskDetails v-if="dataStore.isModalActive" ></TaskDetails>
             </div>
@@ -79,7 +79,7 @@ const filteredHandler = () => {
     @apply w-full md:h-44 px-5 md:flex md:items-center md:justify-between 
 }
 
-.header__right{
+.header__task{
     @apply w-[90%] sm:w-[70%] md:w-[2/3] lg:w-[30%] md:h-full flex flex-col rounded-3xl mx-auto md:mx-0
 } 
 

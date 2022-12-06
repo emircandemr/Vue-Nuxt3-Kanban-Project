@@ -1,10 +1,6 @@
 <script setup>
-import { useDataStore } from '../../stores/use-Data'
-
-const dataStore = useDataStore()
 
 const firebaseUser = useFirebaseUser()
-
 const userID = firebaseUser.value?.uid
 
 const tabData = ref([
@@ -36,8 +32,6 @@ const tabHandler = (id) => {
     item.isActive = false
   })
 }
-
-
 
 </script>
 
